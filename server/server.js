@@ -15,13 +15,13 @@ app.post("/send_email", express.json(), (req, res) => {
     port: 465,
     secure: true,
     auth: {
-      user: "garrett@leftside.design",
-      pass: process.env.EMAIL_PASSWORD
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD
     }
   });
   const mailOptions = {
-    from: "garrett@leftside.design",
-    to: "garrett@leftside.design",
+    from: process.env.SMTP_USER,
+    to: ["garrett@leftside.design", "tyler@leftside.design"],
     subject: `${name || "[ No Name ]"} Contacted You!`,
     text: `
       Name: ${name || "[ No Name ]"}
