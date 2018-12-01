@@ -4,9 +4,9 @@ import {
   fadeInLeft,
   flash,
   flipInX,
-  rubberBand,
-  flipInY
+  rubberBand
 } from "react-animations";
+
 import Sprite from "./Sprite";
 
 export const HomeWrap = styled.main`
@@ -303,26 +303,80 @@ export const ContactWrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background: #f7f7f7;
+  padding: 2rem;
+  margin-bottom: -1rem;
+  position: relative;
   > * {
     font-family: "Concert One", "Helvetica Neue", "Arial", sans-serif;
     font-size: 1.6rem;
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
     &:focus {
       outline: none;
     }
   }
   > p {
-    margin: 0;
+    margin: 0 0 1rem;
     font-size: 3rem;
   }
   input,
   textarea {
     padding: 0.5rem 1rem;
     width: 30rem;
+    margin-bottom: 1rem;
+    background: #fbfbfb;
+    border: none;
+  }
+  > input {
+    margin-bottom: 1rem;
   }
   > textarea {
     border-color: #bfbfbf;
+    height: 8rem;
   }
+`;
+
+export const SendButton = styled.a`
+  font-family: "Nothing You Could Do", cursive;
+  font-size: 2.5rem;
+  max-height: 3.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  ${({ isValidEmail }) =>
+    !isValidEmail &&
+    css`
+      pointer-events: none;
+      opacity: 0.5;
+    `}
+`;
+
+export const EmailError = styled.span`
+  color: #f64740;
+  background: #fbfbfb;
+  font-size: 1rem;
+  position: absolute;
+  top: 12rem;
+  right: 7rem;
+`;
+
+export const GenError = styled.span`
+  color: #f64740;
+  font-size: 1.2rem;
+`;
+
+export const LetterIcon = styled(Sprite)`
+  height: 20rem;
+  width: 20rem;
+
+  animation: 1s ${keyframes`${zoomInLeft}`};
+`;
+
+export const LetterText = styled.p`
+  width: 30rem;
+  text-align: center;
+  animation: 1s ${keyframes`${flipInX}`};
 `;
