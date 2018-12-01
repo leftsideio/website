@@ -13,7 +13,7 @@ export default class Who extends React.Component {
       this.setState({ currentPhoto: photos[index] }, () => {
         index = (index + 1) % photos.length;
       });
-    }, 10000);
+    }, 8000);
   }
 
   componentWillUnmount() {
