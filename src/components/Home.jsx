@@ -1,5 +1,6 @@
 import React from "react";
 import Who from "./Who";
+import Contact from "./Contact";
 import {
   HomeWrap as Wrap,
   Hand,
@@ -10,7 +11,9 @@ import {
   ContactArrow,
   WhoLink,
   ClientsLink,
-  ContactLink
+  ContactLink,
+  ClientTag,
+  Agros
 } from "./styles";
 
 export default class Home extends React.Component {
@@ -36,7 +39,7 @@ export default class Home extends React.Component {
       this.toggleArrow("who");
       this.toggleArrow("clients");
       this.toggleArrow("contact");
-    }, 2000);
+    }, 1250);
   }
 
   /* HANDLERS */
@@ -57,15 +60,17 @@ export default class Home extends React.Component {
       }
     });
 
-  toggleContent = content => {
+  setShowContent = (content, toggle = false) => {
     const { showContent } = this.state;
+    const overrwrite = toggle ? this.state.showContent : null;
     this.setMassStateBoolean(
       Object.keys(showContent).filter(key => key !== content),
       false
     );
     this.setState({
       showContent: {
-        [content]: true
+        ...overrwrite,
+        [content]: toggle ? !this.state.showContent[content] : true
       }
     });
   };
@@ -75,34 +80,44 @@ export default class Home extends React.Component {
       showArrow,
       showContent: { hand, who, clients, contact }
     } = this.state;
+    const stayPut = hand || clients;
     return (
       <Wrap>
-        {hand && <Hand src="images/hands.png" alt="Leftside Design" />}
+        {stayPut && <Hand src="images/hands.png" alt="Leftside Design" />}
         {who && <Who />}
+        {contact && <Contact />}
         <HomeText {...this.state}>
           <h1 onClick={this.resetContentState}>Leftside</h1>
           <p>Design</p>
-          {hand && <WhoArrow name="who-arrow" />}
-          {hand && <ClientsArrow name="clients-arrow" />}
-          {hand && <ContactArrow name="contact-arrow" />}
-          {hand && <DevArrow name="dev-arrow" />}
-          {hand && <span>dev too!</span>}
-          {hand && (
-            <WhoLink onClick={() => this.toggleContent("who")} {...this.state}>
+          {stayPut && <WhoArrow name="who-arrow" />}
+          {stayPut && <ClientsArrow name="clients-arrow" />}
+          {stayPut && <ContactArrow name="contact-arrow" />}
+          {stayPut && <DevArrow name="dev-arrow" />}
+          {stayPut && <span>dev too!</span>}
+          {stayPut && (
+            <WhoLink onClick={() => this.setShowContent("who")} {...this.state}>
               who?
             </WhoLink>
           )}
-          {hand && (
+          {stayPut && (
             <ClientsLink
-              onClick={() => this.toggleContent("clients")}
+              onClick={() => {
+                this.setShowContent("clients", true);
+              }}
               {...this.state}
             >
               clients?
             </ClientsLink>
           )}
-          {hand && (
+          {clients && (
+            <ClientTag href="https://www.agrograph.com/" target="_blank">
+              <Agros name="agros" />
+              <span>Agrograph</span>
+            </ClientTag>
+          )}
+          {stayPut && (
             <ContactLink
-              onClick={() => this.toggleContent("contact")}
+              onClick={() => this.setShowContent("contact")}
               {...this.state}
             >
               contact?

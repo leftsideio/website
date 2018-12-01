@@ -1,6 +1,13 @@
 import styled, { css, keyframes } from "styled-components";
-import { zoomInLeft, fadeInLeft, flash, flipInX } from "react-animations";
-import Sprite from "./__shared/Sprite/";
+import {
+  zoomInLeft,
+  fadeInLeft,
+  flash,
+  flipInX,
+  rubberBand,
+  flipInY
+} from "react-animations";
+import Sprite from "./Sprite";
 
 export const HomeWrap = styled.main`
   height: 100%;
@@ -58,7 +65,7 @@ export const HomeText = styled.div`
       return css`
         svg,
         span {
-          animation: 0.5s ${keyframes`${flash}`} 1.5s !important;
+          animation: 0.5s ${keyframes`${flash}`} 0.75s !important;
         }
       `;
     if (devToo)
@@ -84,7 +91,7 @@ export const DevArrow = styled(Sprite)`
   position: absolute;
   right: -4rem;
   bottom: -1rem;
-  animation: 0.5s ${keyframes`${flash}`} 1.5s;
+  animation: 0.5s ${keyframes`${flash}`} 0.75s;
   transform: rotate(80deg);
 `;
 
@@ -95,7 +102,7 @@ export const WhoArrow = styled(Sprite)`
   position: absolute;
   left: -11rem;
   top: -7rem;
-  animation: 0.5s ${keyframes`${flash}`} 1.5s;
+  animation: 0.5s ${keyframes`${flash}`} 0.75s;
 `;
 
 export const ClientsArrow = styled(Sprite)`
@@ -106,7 +113,7 @@ export const ClientsArrow = styled(Sprite)`
   right: 6rem;
   top: -40rem;
   transform: rotate(0deg);
-  animation: 0.5s ${keyframes`${flash}`} 1.5s;
+  animation: 0.5s ${keyframes`${flash}`} 0.75s;
 `;
 
 export const ContactArrow = styled(Sprite)`
@@ -117,7 +124,7 @@ export const ContactArrow = styled(Sprite)`
   right: -6rem;
   bottom: 16rem;
   transform: rotate(10deg);
-  animation: 0.5s ${keyframes`${flash}`} 1.5s;
+  animation: 0.5s ${keyframes`${flash}`} 0.75s;
 `;
 
 /***
@@ -142,7 +149,7 @@ export const WhoLink = styled.a`
   ${({ showArrow: { who } }) => {
     if (!who)
       return css`
-        animation: 0.5s ${keyframes`${flash}`} 1.5s !important;
+        animation: 0.5s ${keyframes`${flash}`} 0.75s !important;
       `;
     if (who)
       return css`
@@ -167,7 +174,7 @@ export const ClientsLink = styled.a`
   ${({ showArrow: { clients } }) => {
     if (!clients)
       return css`
-        animation: 0.5s ${keyframes`${flash}`} 1.5s !important;
+        animation: 0.5s ${keyframes`${flash}`} 0.75s !important;
       `;
     if (clients)
       return css`
@@ -192,7 +199,7 @@ export const ContactLink = styled.a`
   ${({ showArrow: { contact } }) => {
     if (!contact)
       return css`
-        animation: 0.5s ${keyframes`${flash}`} 1.5s !important;
+        animation: 0.5s ${keyframes`${flash}`} 0.75s !important;
       `;
     if (contact)
       return css`
@@ -210,7 +217,7 @@ export const ContactLink = styled.a`
 export const WhoWrap = styled.div`
   width: 45rem;
   position: relative;
-  animation: 0.3s ${keyframes`${zoomInLeft}`};
+  animation: 1s ${keyframes`${flipInX}`};
   > p {
     font-size: 2rem;
     margin: 2rem 0 0;
@@ -236,10 +243,86 @@ export const SocialSprite = styled(Sprite)`
   height: 3rem;
   width: 3rem;
   fill: #263238;
+  opacity: 0.8;
   animation: 2s ${keyframes`${flipInX}`};
   transition: all 0.2s;
   &:hover {
     cursor: pointer;
     transform: translateY(-1rem);
+  }
+`;
+
+/***
+ ***
+ ** CLIENTS **
+ ***
+ ***/
+
+export const ClientTag = styled.a`
+  position: absolute;
+  top: -39rem;
+  left: -2rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #54843c;
+  transform: rotate(-40deg);
+  transform-origin: bottom center;
+  transition: all 1s;
+  > span {
+    opacity: 0 !important;
+    margin-left: 1rem;
+    font-size: 1.6rem;
+    transition: all 1s;
+  }
+  &:hover {
+    transform: rotate(-40deg) translate(-5rem);
+    > span {
+      opacity: 1 !important;
+    }
+  }
+`;
+export const Agros = styled(Sprite)`
+  height: 5rem;
+  width: 5rem;
+  animation: 0.5s ${keyframes`${rubberBand}`} !important;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+/***
+ ***
+ ** CONTACT **
+ ***
+ ***/
+
+export const ContactWrap = styled.div`
+  animation: 1s ${keyframes`${flipInX}`};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  > * {
+    font-family: "Concert One", "Helvetica Neue", "Arial", sans-serif;
+    font-size: 1.6rem;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  > p {
+    margin: 0;
+    font-size: 3rem;
+  }
+  input,
+  textarea {
+    padding: 0.5rem 1rem;
+    width: 30rem;
+  }
+  > textarea {
+    border-color: #bfbfbf;
   }
 `;

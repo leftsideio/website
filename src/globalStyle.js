@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS } from "./components/__shared/variables";
 
 /********** STYLED-COMPONENTS GLOBALS **********/
 
@@ -22,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-    background: ${COLORS.white.main};
+    background: #fbfbfb;
     font-family: 'Concert One', 'Helvetica Neue','Arial', sans-serif;
     color: #263238;
     > #app {
@@ -32,5 +31,14 @@ export const GlobalStyle = createGlobalStyle`
   }
   p {
     font-family: 'Nothing You Could Do', cursive !important;
+  }
+  input, textarea {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+  ::selection {
+    background-color: lightgrey;
   }
   `;
