@@ -35,6 +35,10 @@ app.post("/send_email", express.json(), (req, res) => {
   });
 });
 
+app.get("/*", (req, res) => {
+  res.redirect("/");
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"));
 });
