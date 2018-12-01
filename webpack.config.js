@@ -1,6 +1,6 @@
-const path = require("path")
-const webpack = require("webpack")
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
+const path = require("path");
+const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -31,17 +31,18 @@ module.exports = {
       })
     ]
   },
-  devtool: process.env.NODE_ENV === "production" ? "source-map" : "inline-source-map",
+  devtool:
+    process.env.NODE_ENV === "production" ? "source-map" : "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "public"),
     historyApiFallback: true,
     publicPath: "/dist",
     proxy: [
       {
-        context: [],
+        context: ["/send_email"],
         target: "http://[::1]:3000",
         secure: false
       }
     ]
   }
-}
+};
