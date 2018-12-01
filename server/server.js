@@ -22,11 +22,11 @@ app.post("/send_email", express.json(), (req, res) => {
   const mailOptions = {
     from: "garrett@leftside.design",
     to: "garrett@leftside.design",
-    subject: `${name} Contacted You!`,
+    subject: `${name || "[ No Name ]"} Contacted You!`,
     text: `
-      Name: ${name}
+      Name: ${name || "[ No Name ]"}
       Email: ${email}
-      Message: ${message}
+      Message: ${message || "[ Empty Message ]"}
     `
   };
   smtp.sendMail(mailOptions, (error, info) => {
