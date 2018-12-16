@@ -11,11 +11,18 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   html {
+    margin: auto;
     font-size: 62.5%;
     min-width: 100vw;
     min-height: 100vh;
     height: 100%;
     width: 100%;
+    @media only screen and (max-width: 37.5em) {
+      font-size: 50%;
+    }
+    @media only screen and (max-width: 31.25em) {
+      font-size: 37.5%;
+    }
   }
   body {
     box-sizing: border-box;

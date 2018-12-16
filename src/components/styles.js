@@ -9,6 +9,23 @@ import {
 
 import Sprite from "./Sprite";
 
+const sizes = {
+  xl: 1200,
+  small: 600,
+  xs: 500,
+  xxs: 350
+};
+
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `;
+
+  return acc;
+}, {});
+
 export const HomeWrap = styled.main`
   height: 100%;
   width: 100%;
@@ -17,6 +34,9 @@ export const HomeWrap = styled.main`
   align-items: center;
   flex-direction: column;
   position: relative;
+  ${media.xs`
+    overflow: hidden;
+  `}
 `;
 
 export const Hand = styled.img`
@@ -42,6 +62,9 @@ export const HomeText = styled.div`
     right: -4rem;
     font-size: 5rem;
     transform: translateY(-1rem);
+    ${media.xxs`
+      right: -2rem;
+    `}
   }
   > span {
     font-family: "Nothing You Could Do", cursive !important;
@@ -55,6 +78,10 @@ export const HomeText = styled.div`
     animation: 0.5s ${keyframes`${flash}`};
     width: 0;
     line-height: 1.4rem;
+    ${media.xxs`
+      opacity: 0;
+      visibility: hidden;
+    `}
   }
   > svg {
     opacity: 0;
@@ -93,6 +120,10 @@ export const DevArrow = styled(Sprite)`
   bottom: -1rem;
   animation: 0.5s ${keyframes`${flash}`} 0.75s;
   transform: rotate(80deg);
+  ${media.xxs`
+    opacity: 0;
+    visibility: hidden;
+  `}
 `;
 
 export const WhoArrow = styled(Sprite)`
@@ -103,6 +134,11 @@ export const WhoArrow = styled(Sprite)`
   left: -11rem;
   top: -7rem;
   animation: 0.5s ${keyframes`${flash}`} 0.75s;
+  ${media.xs`
+    opacity: 0;
+    visibility: hidden;
+
+  `}
 `;
 
 export const ClientsArrow = styled(Sprite)`
@@ -114,6 +150,10 @@ export const ClientsArrow = styled(Sprite)`
   top: -40rem;
   transform: rotate(0deg);
   animation: 0.5s ${keyframes`${flash}`} 0.75s;
+  ${media.xs`
+    opacity: 0;
+    visibility: hidden;
+  `}
 `;
 
 export const ContactArrow = styled(Sprite)`
@@ -125,6 +165,13 @@ export const ContactArrow = styled(Sprite)`
   bottom: 16rem;
   transform: rotate(10deg);
   animation: 0.5s ${keyframes`${flash}`} 0.75s;
+  ${media.small`
+    right: -8rem;
+  `}
+  ${media.xs`
+    opacity: 0;
+    visibility: hidden;
+  `}
 `;
 
 /***
@@ -142,6 +189,15 @@ export const WhoLink = styled.a`
   transform: rotate(-15deg);
   animation: 0.5s ${keyframes`${flash}`};
   opacity: 0;
+  ${media.xs`
+    bottom: auto;
+    top: -38rem;
+    left: 2rem;
+    transform: translateX(-50%) rotate(0deg);
+  `}
+  ${media.xxs`
+    top: -36rem;
+  `}
   &:hover {
     cursor: pointer;
     text-decoration: underline;
@@ -167,6 +223,18 @@ export const ClientsLink = styled.a`
   transform: rotate(-40deg);
   animation: 0.5s ${keyframes`${flash}`};
   opacity: 0;
+  ${media.small`
+    left: -5rem;
+  `}
+  ${media.xs`
+    top: -38rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+  `}
+    ${media.xxs`
+      top: -36rem;
+      left: calc(50% - 1rem);
+    `}
   &:hover {
     cursor: pointer;
     text-decoration: underline;
@@ -192,6 +260,16 @@ export const ContactLink = styled.a`
   transform: rotate(0deg);
   animation: 0.5s ${keyframes`${flash}`};
   opacity: 0;
+  ${media.xs`
+    bottom: auto;
+    top: -38rem;
+    right: 0rem;
+    transform: translateX(50%);
+  `}
+  ${media.xxs`
+      top: -36rem;
+      right: 2.5rem;
+    `}
   &:hover {
     cursor: pointer;
     text-decoration: underline;
@@ -222,6 +300,12 @@ export const WhoWrap = styled.div`
     font-size: 2rem;
     margin: 2rem 0 0;
   }
+  ${media.xs`
+    width: 30rem;
+    > p {
+      font-size: 2.5rem;
+    }
+  `}
 `;
 
 export const SocialWrap = styled.div`
@@ -269,6 +353,19 @@ export const ClientTag = styled.a`
   transform: rotate(-40deg);
   transform-origin: bottom center;
   transition: all 1s;
+  ${media.small`
+    top: -40rem;
+    left: -4rem;
+  `}
+  ${media.xs`
+    transform: translateX(calc(-50% + 2.5rem)) rotate(0deg);
+    top: -35rem;
+    left: 50%;
+  `}
+  ${media.xxs`
+    top: -33rem;
+    transform: translateX(calc(-50% + 1.5rem)) rotate(0deg);
+  `}
   > span {
     opacity: 0 !important;
     margin-left: 1rem;
@@ -280,6 +377,12 @@ export const ClientTag = styled.a`
     > span {
       opacity: 1 !important;
     }
+    ${media.xs`
+      transform: rotate(0deg);
+      > span {
+        opacity: 0 !important
+      }
+  `}
   }
 `;
 export const Agros = styled(Sprite)`
@@ -325,6 +428,9 @@ export const ContactWrap = styled.div`
     margin-bottom: 1rem;
     background: #fbfbfb;
     border: none;
+    ${media.xs`
+      font-size: 16px !important;
+  `}
   }
   > input {
     margin-bottom: 1rem;
@@ -342,6 +448,9 @@ export const SendButton = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${media.xs`
+    font-size: 4rem;
+  `}
   &:hover {
     cursor: pointer;
     text-decoration: underline;
@@ -361,6 +470,11 @@ export const EmailError = styled.span`
   position: absolute;
   top: 12rem;
   right: 7rem;
+  ${media.xs`
+    font-size: 1.6rem;
+    top: 11rem;
+    right: 3rem;
+  `}
 `;
 
 export const GenError = styled.span`
