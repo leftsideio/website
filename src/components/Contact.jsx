@@ -64,7 +64,7 @@ export default class Contact extends React.Component {
     } = this.state;
     return (
       <ContactWrap {...this.state}>
-        {!success && (
+        {!success ? (
           <>
             <p>let's do some work together</p>
             <input
@@ -95,8 +95,7 @@ export default class Contact extends React.Component {
             </SendButton>
             {error && <GenError>{error}</GenError>}
           </>
-        )}
-        {success && (
+        ) : (
           <>
             <LetterIcon name="letter" />
             <LetterText>Looking forward to working together!</LetterText>
