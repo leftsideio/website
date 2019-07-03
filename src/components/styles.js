@@ -348,12 +348,12 @@ export const ClientTag = styled.a`
   left: -2rem;
   display: flex;
   align-items: center;
+  flex-direction: column;
   text-decoration: none;
-  color: #54843c;
   transform: rotate(-40deg);
   transform-origin: bottom center;
   transition: all 1s;
-  ${media.small`
+  /* ${media.small`
     top: -40rem;
     left: -4rem;
   `}
@@ -365,10 +365,10 @@ export const ClientTag = styled.a`
   ${media.xxs`
     top: -33rem;
     transform: translateX(calc(-50% + 1.5rem)) rotate(0deg);
-  `}
+  `} */
   > span {
     opacity: 0 !important;
-    margin-left: 1rem;
+    margin-bottom: 1rem;
     font-size: 1.6rem;
     transition: all 1s;
   }
@@ -377,15 +377,33 @@ export const ClientTag = styled.a`
     > span {
       opacity: 1 !important;
     }
-    ${media.xs`
-      transform: rotate(0deg);
-      > span {
-        opacity: 0 !important
-      }
-  `}
   }
+    ${({ clientStyles }) =>
+      clientStyles &&
+      css`
+        top: ${clientStyles.top}rem;
+        left: ${clientStyles.left}rem;
+        color: ${clientStyles.color};
+        &:hover {
+          transform: ${`rotate(-40deg) translate(${
+            clientStyles.client === "agrograph" ? "-5rem" : "5rem"
+          })`};
+        }
+        ${media.small`
+        top: ${clientStyles.top - 1}rem;
+        left: ${clientStyles.left - 2}rem;
+        `}
+        ${media.xs`
+        top: -44rem;
+        left: ${clientStyles.xsLeft}
+        transform: rotate(0deg);
+        > span {
+          display: none;
+        }
+        `}
+      `}
 `;
-export const Agros = styled(Sprite)`
+export const Client = styled(Sprite)`
   height: 5rem;
   width: 5rem;
   animation: 0.5s ${keyframes`${rubberBand}`} !important;
@@ -394,6 +412,14 @@ export const Agros = styled(Sprite)`
   }
 `;
 
+export const ClientImg = styled.img`
+  height: 5rem;
+  width: 5rem;
+  animation: 0.5s ${keyframes`${rubberBand}`} !important;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 /***
  ***
  ** CONTACT **

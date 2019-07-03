@@ -13,7 +13,8 @@ import {
   ClientsLink,
   ContactLink,
   ClientTag,
-  Agros
+  Client,
+  ClientImg
 } from "./styles";
 
 export default class Home extends React.Component {
@@ -110,10 +111,36 @@ export default class Home extends React.Component {
             </ClientsLink>
           )}
           {clients && (
-            <ClientTag href="https://www.agrograph.com/" target="_blank">
-              <Agros name="agros" />
-              <span>Agrograph</span>
-            </ClientTag>
+            <>
+              <ClientTag
+                href="https://www.agrograph.com/"
+                target="_blank"
+                clientStyles={{
+                  client: "agrograph",
+                  top: -36,
+                  left: -5,
+                  color: "#54843c",
+                  xsLeft: "30%"
+                }}
+              >
+                <span>Agrograph</span>
+                <Client name="agros" />
+              </ClientTag>
+              <ClientTag
+                href="https://torqlabs.com/"
+                target="_blank"
+                clientStyles={{
+                  client: "torq",
+                  top: -40,
+                  left: 0,
+                  color: "#111033",
+                  xsLeft: "55%"
+                }}
+              >
+                <span>Torq Labs</span>
+                <ClientImg src="images/torq.svg" />
+              </ClientTag>
+            </>
           )}
           {stayPut && (
             <ContactLink
