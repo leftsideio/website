@@ -1,0 +1,26 @@
+{
+    "react": {
+        "block": "// react \n\nimport { render } from \"react-dom\"\r\n\r\nrender(\r\n  <h1>Hello, World!</h1>,\r\n  document.getElementById('root')\r\n);",
+        "lang": "javascript"
+    },
+    "graphql": {
+        "block": "// graphql \n\nconst root = { hello: () => {\n return 'Hello, World!' \n}\n\ngraphql(schema, '{ hello }', root)",
+        "lang": "javascript"
+    },
+    "express": {
+        "block": "// express \n\nimport express from \"express\"\r\nconst app = express()\r\n\r\napp.get('/', (req, res) => {\r\n  res.send('Hello, World!')\r\n})",
+        "lang": "javascript"
+    },
+    "flask": {
+        "block": "# flask \n\nfrom flask import Flask\r\napp = Flask(__name__)\r\n\r\n@app.route('/')\r\ndef hello_world():\r\n    return 'Hello, World!'",
+        "lang": "python"
+    },
+    "postgres": {
+        "block": "-- postgres \n\nCREATE FUNCTION hello_world() \r\nRETURNS text AS $$\r\nBEGIN\r\nRETURN 'Hello, World!';\r\nEND\r\n$$ LANGUAGE plpgsql;",
+        "lang": "sql"
+    },
+    "bash": {
+        "block": "# bash\n\n#!/bin/bash\necho \"Hello, World!\"\r\n\r\n$ chmod u+x hello.sh\r\n\r\n$ ./hello.sh",
+        "language": "bash"
+    }
+}
