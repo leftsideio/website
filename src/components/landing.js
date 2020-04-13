@@ -111,8 +111,8 @@ const Box = styled.section`
     justify-content: flex-start;
   }
   @media (max-width: 550px) {
-    padding-right: 4rem;
-    padding-left: 4rem;
+    padding-right: 2rem;
+    padding-left: 2em;
     margin: auto 0;
   }
 `
@@ -135,7 +135,7 @@ const CodeBlock = styled(Highlight)`
   @media (max-width: 380px) {
     display: flex;
     align-items: center;
-    height: 18rem;
+    min-height: 16rem;
   }
   code {
     font-size: 1.8rem;
