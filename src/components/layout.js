@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
     <>
       <Helmet>
         <link
-          href="https://fonts.googleapis.com/css2?family=Raleway&family=Titan+One&family=IBM+Plex+Mono:wght@500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@800&family=Titan+One&family=IBM+Plex+Mono:wght@700&display=swap"
           rel="stylesheet"
         ></link>
         <link
@@ -63,12 +63,18 @@ html {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  @media (max-width: 500px) {
+    font-size: 56.25%;
+  }
+  @media (max-width: 420px) {
+    font-size: 50%;
+  }
 }
 body {
   background: ${colors.almond};
   color: ${colors.raisin};
-  font-family: 'Raleway', sans-serif;
-  font-weight: 400;
+  font-family: "Baloo Tamma 2", cursive;
+  font-weight: 800;
   font-style: normal;
   box-sizing: border-box;
   height: 100%;
@@ -81,6 +87,7 @@ h4,
 h5,
 h6 {
   font-family: 'Titan One', cursive;
+  font-weight: 400;
 }
 code {
   font-family: 'IBM Plex Mono', monospace;
