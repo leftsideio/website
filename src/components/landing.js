@@ -63,17 +63,18 @@ const Landing = () => {
         </CodeBlock>
         <Message>software development?</Message>
       </Box>
-
-      <Company>
-        <Fist />
-        <Leftside>
-          Left[<Baloo>side</Baloo>]
-        </Leftside>
-      </Company>
-      <Email href="mailto:hello@leftside.io">
-        <Underline>hello</Underline>
-        <span>@leftside.io</span>
-      </Email>
+      <Foot>
+        <Company>
+          <Fist />
+          <Leftside>
+            Left[<Baloo>side</Baloo>]
+          </Leftside>
+        </Company>
+        <Email href="mailto:hello@leftside.io">
+          <Underline>hello</Underline>
+          <span>@leftside.io</span>
+        </Email>
+      </Foot>
     </>
   )
 }
@@ -101,12 +102,18 @@ const fadeInWidth = keyframes`
   }
 `
 const Box = styled.section`
+  padding: 4rem 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
   animation: ${fadeIn} 1s;
+  @media (max-height: 700px) {
+    justify-content: flex-start;
+  }
   @media (max-width: 550px) {
-    padding: 0 2rem;
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin: auto 0;
   }
 `
 
@@ -126,7 +133,9 @@ const CodeBlock = styled(Highlight)`
     padding: 1rem;
   }
   @media (max-width: 380px) {
-    min-height: 16rem;
+    display: flex;
+    align-items: center;
+    height: 18rem;
   }
   code {
     font-size: 1.8rem;
@@ -136,19 +145,30 @@ const CodeBlock = styled(Highlight)`
     }
   }
 `
-
-const Company = styled.div`
+const Foot = styled.div`
+  padding: 0 3rem;
   position: absolute;
   bottom: 1.5rem;
-  left: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  @media (max-height: 700px) {
+    position: static;
+  }
+  @media (max-width: 550px) {
+    position: static;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+  }
+`
+const Company = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  @media (max-width: 550px) {
-    left: 50%;
-    transform: translateX(-50%);
-  }
 `
 
 const Fist = styled(Logo)`
@@ -159,23 +179,11 @@ const Leftside = styled.h4`
   font-size: 2.5rem;
 `
 const Email = styled.a`
-  position: absolute;
-  bottom: 1.5rem;
-  right: 3rem;
   font-size: 3rem;
   font-family: "Titan One", cursive;
   font-weight: 400;
   text-decoration: none;
   color: ${colors.raisin};
-  @media (max-width: 550px) {
-    bottom: auto;
-    top: 2rem;
-  }
-  @media (max-width: 450px) {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 `
 
 const UnderConstruction = styled.p`
@@ -186,9 +194,6 @@ const UnderConstruction = styled.p`
   font-size: 1.4rem;
   opacity: 0;
   transition: all 0.4s;
-  @media (max-width: 450px) {
-    display: none;
-  }
 `
 const Construction = styled.aside`
   position: absolute;
@@ -202,7 +207,10 @@ const Construction = styled.aside`
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   font-size: 2.5rem;
   font-family: "Titan One";
-  @media (max-width: 450px) {
+  @media (max-height: 700px) {
+    display: none;
+  }
+  @media (max-width: 550px) {
     display: none;
   }
   &:hover {
