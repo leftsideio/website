@@ -46,6 +46,7 @@ const Container = styled.main`
   justify-content: center;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 `
 
 export const GlobalStyle = createGlobalStyle`
@@ -69,6 +70,7 @@ html {
   }
   @media (max-width: 420px) {
     font-size: 50%;
+
   }
 }
 body {
