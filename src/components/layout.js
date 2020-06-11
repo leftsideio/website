@@ -45,6 +45,7 @@ const Container = styled.main`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
 `
 
 export const GlobalStyle = createGlobalStyle`
@@ -71,8 +72,8 @@ html {
   }
 }
 body {
-  background: ${colors.almond};
-  color: ${colors.raisin};
+  background: ${colors.raisin};
+  color: ${colors.almond};
   font-family: "Baloo Tamma 2", cursive;
   font-weight: 800;
   font-style: normal;
