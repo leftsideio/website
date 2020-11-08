@@ -1,3 +1,8 @@
+const path = require("path")
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
     title: `Leftside`,
@@ -7,23 +12,31 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
-        path: `${__dirname}/src/assets/images`,
-        name: `assets`,
+        custom: {
+          families: ["Speedee", "Montserrat"],
+          urls: ["/fonts/fonts.css"],
+        },
       },
     },
+    `gatsby-plugin-styled-components`,
+    "gatsby-plugin-svgr",
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        rule: {
-          include: /src\/assets\/svg/,
-        },
+        name: `images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-styled-components`,
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        "~": path.join(__dirname, "src/"),
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -33,7 +46,7 @@ module.exports = {
         background_color: `#EBE5D1`,
         theme_color: `#EBE5D1`,
         display: `minimal-ui`,
-        icon: `src/assets/images/logo.png`,
+        // icon: `src/assets/images/logo.png`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

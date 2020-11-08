@@ -1,13 +1,10 @@
-import React from "react"
-
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import BLM from "../components/blm"
+import Layout from "~/components/Layout"
+import SEO from "~/components/SEO"
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Say Their Names" />
-    <BLM />
+    <SEO title="Leftside" />
+    Hello World
   </Layout>
 )
 
