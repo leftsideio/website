@@ -43,10 +43,10 @@ module.exports = {
         name: `leftside.io`,
         short_name: `leftside`,
         start_url: `/`,
-        background_color: `#EBE5D1`,
-        theme_color: `#EBE5D1`,
+        background_color: `#fcfcfc`,
+        theme_color: `#fcfcfc`,
         display: `minimal-ui`,
-        // icon: `src/assets/images/logo.png`,
+        icon: `src/assets/images/favicon/logo.png`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
