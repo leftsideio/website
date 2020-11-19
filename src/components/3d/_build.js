@@ -27,20 +27,20 @@ export function roadlines() {
 }
 
 export function sidewalk() {
-  let topLeft = new THREE.PlaneBufferGeometry(8, 300, 0, 0)
+  let topLeft = new THREE.PlaneBufferGeometry(8, 500, 0, 0)
   topLeft.translate(-10, 110, 0.5)
   topLeft.rotateX(-Math.PI * 0.5)
 
-  let sideLeft = new THREE.PlaneBufferGeometry(0.5, 300, 0, 0)
+  let sideLeft = new THREE.PlaneBufferGeometry(0.5, 500, 0, 0)
   sideLeft.translate(0.06, 110, 6)
   sideLeft.rotateX(-Math.PI * 0.5)
   sideLeft.rotateZ(Math.PI * 0.49)
 
-  let topRight = new THREE.PlaneBufferGeometry(8, 300, 0, 0)
+  let topRight = new THREE.PlaneBufferGeometry(8, 500, 0, 0)
   topRight.translate(10, 110, 0.5)
   topRight.rotateX(-Math.PI * 0.5)
 
-  let sideRight = new THREE.PlaneBufferGeometry(0.5, 300, 0, 0)
+  let sideRight = new THREE.PlaneBufferGeometry(0.5, 500, 0, 0)
   sideRight.translate(0.44, 110, -6)
   sideRight.rotateX(-Math.PI * 0.5)
   sideRight.rotateZ(Math.PI * 0.49)
