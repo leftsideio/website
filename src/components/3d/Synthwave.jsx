@@ -42,14 +42,14 @@ function Floor() {
 
 function Road() {
   const store = useStore(state => state.synthwave)
-  if (!store.geometry.roadLines) return null
+  if (!store.geometry.roadlines) return null
   return (
     <group>
       <mesh rotation={[-Math.PI * 0.5, 0, 0]} translate={[0, 110, 0.1]}>
         <planeBufferGeometry args={[12, 300, 0, 0]} />
         <meshBasicMaterial color="#03353b" transparent opacity={0.7} />
       </mesh>
-      <mesh geometry={store.geometry.roadLines}>
+      <mesh geometry={store.geometry.roadlines}>
         <meshBasicMaterial color="#fff" transparent opacity={0.3} />
       </mesh>
     </group>
@@ -141,7 +141,7 @@ function CityClose() {
     </group>
   )
 }
-export default function App() {
+export default function Scene() {
   const store = useStore(state => state.synthwave)
   return (
     <Container>
@@ -155,7 +155,7 @@ export default function App() {
           far: 2000,
           position: [0, 1.8, 7],
         }}
-        onCreated={({ scene, camera, gl }) => {
+        onCreated={({ scene, camera }) => {
           scene.background = new THREE.Color("#000009")
           store.actions.init(camera)
         }}
@@ -184,33 +184,4 @@ const Container = styled.div`
   height: 360px;
   /* height: 100vh;
   width: 100vw; */
-  /* box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.3); */
-  /* box-shadow: -5px -5px 0px #171717, 5px 5px 0px #171717; */
 `
-
-// const GROUND_HEIGHT = -50
-
-// function Terrain() {
-//   const terrain = useRef()
-//   useFrame(() => {
-//     terrain.current.position.z += 0.4
-//   })
-//   return (
-//     <mesh
-//       visible
-//       position={[0, GROUND_HEIGHT, 0]}
-//       rotation={[-Math.PI / 2, 0, 0]}
-//       ref={terrain}
-//     >
-//       <planeBufferGeometry attach="geometry" args={[5000, 5000, 128, 128]} />
-//       <meshStandardMaterial
-//         attach="material"
-//         color="white"
-//         roughness={1}
-//         metalness={0}
-//         wireframe
-//       />
-//     </mesh>
-//   )
-// }
