@@ -1,5 +1,5 @@
 import * as THREE from "three"
-import { useRef, memo, useEffect, useMemo } from "react"
+import { useRef, memo, useEffect, useMemo, useState } from "react"
 import { Canvas, useFrame, useThree, extend } from "react-three-fiber"
 import styled from "styled-components"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
@@ -164,11 +164,20 @@ function CityClose() {
 const Effects = memo(() => {
   const { gl, scene, camera, size } = useThree()
   const composer = useRef()
+  let [glitch, setGlitch] = useState(false)
   // need to make this dynamic for responsive viewports
   const windowDimensions = useMemo(() => new THREE.Vector2(480, 360), [])
   useEffect(() => void composer.current.setSize(size.width, size.height), [size])
   // This takes over as the main render-loop (when 2nd arg is set to true)
-  useFrame(() => composer.current.render(), 1)
+  useFrame(state => {
+    const time = state.clock.getElapsedTime()
+    if (glitch && time % 6 >= 5) {
+      setGlitch(false)
+    } else if (!glitch && time % 13 >= 12) {
+      setGlitch(true)
+    }
+    composer.current.render()
+  }, 1)
   return (
     <effectComposer ref={composer} args={[gl]}>
       <renderPass attachArray="passes" args={[scene, camera]} />
@@ -179,7 +188,7 @@ const Effects = memo(() => {
         threshold={0}
         radius={0.8}
       />
-      <glitchPass attachArray="passes" renderToScreen />
+      <glitchPass attachArray="passes" renderToScreen enabled={glitch} />
       <filmPass attachArray="passes" args={[0.2, 0.75, 2048, false]} />
     </effectComposer>
   )
