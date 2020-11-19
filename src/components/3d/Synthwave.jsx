@@ -1,11 +1,24 @@
 import * as THREE from "three"
-import { useRef } from "react"
+import { useRef, memo, useEffect, useMemo } from "react"
 import { Canvas, useFrame, useThree, extend } from "react-three-fiber"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import styled from "styled-components"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js" // To merge post-processing effects
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js" // To render post-processing effects
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js" // Bloom/Glow
+import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js" // Glitch effect
+import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass.js" // CRT effect
+
 import useStore from "~/store"
 
-extend({ OrbitControls })
+extend({
+  OrbitControls,
+  EffectComposer,
+  RenderPass,
+  UnrealBloomPass,
+  GlitchPass,
+  FilmPass,
+})
 
 function CameraControls() {
   const { camera, gl } = useThree()
@@ -147,6 +160,31 @@ function CityClose() {
     </group>
   )
 }
+
+const Effects = memo(() => {
+  const { gl, scene, camera, size } = useThree()
+  const composer = useRef()
+  // need to make this dynamic for responsive viewports
+  const windowDimensions = useMemo(() => new THREE.Vector2(480, 360), [])
+  useEffect(() => void composer.current.setSize(size.width, size.height), [size])
+  // This takes over as the main render-loop (when 2nd arg is set to true)
+  useFrame(() => composer.current.render(), 1)
+  return (
+    <effectComposer ref={composer} args={[gl]}>
+      <renderPass attachArray="passes" args={[scene, camera]} />
+      <unrealBloomPass
+        attachArray="passes"
+        args={[windowDimensions, 2, 0, 0.8]}
+        strength={2}
+        threshold={0}
+        radius={0.8}
+      />
+      <glitchPass attachArray="passes" renderToScreen />
+      <filmPass attachArray="passes" args={[0.2, 0.75, 2048, false]} />
+    </effectComposer>
+  )
+})
+
 export default function Scene() {
   const store = useStore(state => state.synthwave)
   return (
@@ -161,11 +199,14 @@ export default function Scene() {
           far: 2000,
           position: [0, 1.8, 7],
         }}
-        onCreated={({ scene, camera }) => {
+        onCreated={({ scene, camera, gl }) => {
           scene.background = new THREE.Color("#000009")
+          gl.toneMapping = THREE.ReinhardToneMapping
+          gl.toneMappingExposure = Math.pow(1, 4.0)
           store.actions.init(camera)
         }}
       >
+        <Effects />
         <CameraControls />
         <Sun />
         <CityFar />
