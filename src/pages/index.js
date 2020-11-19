@@ -19,8 +19,9 @@ export default IndexPage
 
 const Mac = styled.img`
   position: absolute;
-  bottom: 0;
-  right: 2rem;
+  bottom: 1rem;
+  left: 50%;
   max-width: 60rem;
   height: auto;
+  transform: translateX(-50%);
 `

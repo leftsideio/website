@@ -27,8 +27,9 @@ html {
 }
 body {
   position: relative;
-  background: #fff;
-  color: #000
+  background: #efefef;
+  /* background: #141414; */
+  color: #000;
   font-family: "Baloo Tamma 2", cursive;
   font-weight: 800;
   font-style: normal;
