@@ -42,7 +42,13 @@ function Floor() {
 
 function Road() {
   const store = useStore(state => state.synthwave)
+  // currently runs all animation
+  useFrame(state => {
+    store.actions.animate(state.clock.getElapsedTime())
+  })
+
   if (!store.geometry.roadlines) return null
+
   return (
     <group>
       <mesh rotation={[-Math.PI * 0.5, 0, 0]} translate={[0, 110, 0.1]}>
@@ -66,6 +72,7 @@ function Sidewalk() {
         transparent
         opacity={0.8}
         side={THREE.DoubleSide}
+        onBeforeCompile={store.actions.createGridMaterial}
       />
     </mesh>
   )
@@ -83,7 +90,6 @@ function Pyramids() {
 }
 function Palms() {
   const store = useStore(state => state.synthwave)
-
   if (!store.geometry.palms) return null
   return <primitive object={store.geometry.palms} dispose={null} />
 }

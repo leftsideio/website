@@ -47,7 +47,7 @@ export function sidewalk() {
   return mergeBufferGeometries([topLeft, sideLeft, topRight, sideRight])
 }
 
-export function pyramids(speed) {
+export function pyramids(opts) {
   let randomSize, translateX, translateZ, rotatePyramid
 
   let pyramidGeometry
@@ -123,7 +123,7 @@ export function pyramids(speed) {
     color: 0x000000,
   })
   pyramidGroupMaterial.onBeforeCompile = shader => {
-    updateObjectShader(speed, shader, 950, 800)
+    updateObjectShader(opts, shader, 950, 800)
   }
 
   // This needs to be improved...
@@ -135,7 +135,7 @@ export function pyramids(speed) {
     polygonOffsetUnits: 1,
   })
   pyramidGroupWireframeMaterial.onBeforeCompile = shader => {
-    updateObjectShader(speed, shader, 950, 800, 1.01)
+    updateObjectShader(opts, shader, 950, 800, 1.01)
   }
 
   let pyramidGroupMaterials = [pyramidGroupMaterial, pyramidGroupWireframeMaterial]
@@ -147,7 +147,7 @@ export function pyramids(speed) {
   return pyramidGroups
 }
 
-export function palms(speed) {
+export function palms(opts) {
   let palmTreeConception = []
   // Paltree log
   var logGeometry = new THREE.CylinderBufferGeometry(0.25, 0.125, 10, 5, 4, true)
@@ -198,7 +198,7 @@ export function palms(speed) {
   })
 
   palmTreeMaterial.onBeforeCompile = shader => {
-    updateObjectShader(speed, shader, 600, 500, undefined, 0.8, true)
+    updateObjectShader(opts, shader, 600, 500, undefined, 0.8, true)
   }
 
   // Add palm trees to the scene
@@ -336,7 +336,7 @@ export function updateGridShader(shader, speed) {
 }
 
 function updateObjectShader(
-  speed,
+  { speed, cb },
   shader,
   value1,
   value2,
@@ -371,5 +371,5 @@ function updateObjectShader(
     		transformed += ip;
     		`
   )
-  return shader
+  cb(shader)
 }
