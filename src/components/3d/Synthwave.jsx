@@ -1,8 +1,9 @@
 import * as THREE from "three"
-import { useRef, memo, useEffect, useMemo, useState } from "react"
-import { Canvas, useFrame, useThree, extend } from "react-three-fiber"
+import { useRef, memo, useEffect, useMemo, useState, Suspense } from "react"
+import { Canvas, useFrame, useThree, extend, useLoader } from "react-three-fiber"
 import styled from "styled-components"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js" // To merge post-processing effects
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js" // To render post-processing effects
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js" // Bloom/Glow
@@ -40,6 +41,29 @@ function CameraControls() {
   )
 }
 
+function Car() {
+  let [position, setPosition] = useState()
+  const gltf = useLoader(GLTFLoader, "/models/car.gltf")
+  const light = useMemo(() => new THREE.SpotLight(0xffffff), [])
+  const car = useRef()
+  useFrame(({ mouse }) => {
+    setPosition({
+      position: { x: mouse.x * 6, y: mouse.y * 2 },
+      rotation: { z: -mouse.x * 0.5, x: -mouse.x * 0.5, y: -mouse.y * 0.2 },
+    })
+  })
+
+  useFrame(() => {
+    car.current.position.x = position.position.x
+  })
+  return (
+    <group ref={car} dispose={null}>
+      <primitive object={light} position={[-50, 50, 50]} />
+      <primitive object={light.target} position={[25, 0, 50]} />
+      <primitive object={gltf.scene} />
+    </group>
+  )
+}
 function Floor() {
   const store = useStore(state => state.synthwave)
   return (
@@ -63,7 +87,7 @@ function Road() {
   if (!store.geometry.roadlines) return null
 
   return (
-    <group>
+    <group dispose={null}>
       <mesh rotation={[-Math.PI * 0.5, 0, 0]} translate={[0, 110, 0.1]}>
         <planeBufferGeometry args={[12, 300, 0, 0]} />
         <meshBasicMaterial color="#03353b" transparent opacity={0.7} />
@@ -214,6 +238,7 @@ export default function Scene() {
           gl.toneMappingExposure = Math.pow(1, 4.0)
           store.actions.init(camera)
         }}
+        style={{ borderRadius: "8px" }}
       >
         <Effects />
         <CameraControls />
@@ -226,6 +251,9 @@ export default function Scene() {
         <Pyramids />
         <Palms />
         <Sky />
+        <Suspense fallback={null}>
+          <Car />
+        </Suspense>
       </Canvas>
     </Container>
   )
@@ -238,6 +266,7 @@ const Container = styled.div`
   transform: translateX(-50%);
   width: 480px;
   height: 360px;
+
   /* height: 100vh;
   width: 100vw; */
 `
