@@ -220,6 +220,7 @@ const Effects = memo(() => {
 
 export default function Scene() {
   const store = useStore(state => state.synthwave)
+  if (typeof window === "undefined") return null
   return (
     <Container>
       <Canvas
