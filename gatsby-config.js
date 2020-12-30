@@ -12,10 +12,17 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`montserrat\:400`, `orbitron\:700`],
+        display: "swap",
+      },
+    },
+    {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         custom: {
-          families: ["Speedee", "Montserrat"],
+          families: ["Neoneon"],
           urls: ["/fonts/fonts.css"],
         },
       },

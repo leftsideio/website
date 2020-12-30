@@ -29,9 +29,9 @@ body {
   position: relative;
   background: #efefef;
   /* background: #141414; */
-  color: #000;
-  font-family: "Baloo Tamma 2", cursive;
-  font-weight: 800;
+  color: #110d1e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   font-style: normal;
   box-sizing: border-box;
   height: 100%;
@@ -43,13 +43,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Titan One', cursive;
-  font-weight: 400;
-}
-code {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Orbitron', sans-serif;
   font-weight: 500;
 }
+/* code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+} */
 ::selection {}
 `
 
