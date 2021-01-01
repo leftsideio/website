@@ -1,8 +1,14 @@
 import { createGlobalStyle } from "styled-components"
 import cssReset from "styled-reset"
+import { COLORS } from "./constants"
 
 const GlobalStyle = createGlobalStyle`
 ${cssReset}
+:root {
+  --color-text: ${COLORS.light.text};
+  --color-background: ${COLORS.light.background};
+  --icon-color: red;
+}
 *,
 *:before,
 *:after {
@@ -27,9 +33,8 @@ html {
 }
 body {
   position: relative;
-  background: #efefef;
-  /* background: #141414; */
-  color: #110d1e;
+  background: var(--color-background);
+  color: var(--color-text);
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-style: normal;
