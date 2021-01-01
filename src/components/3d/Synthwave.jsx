@@ -10,7 +10,7 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js" // Glitch effect
 import { FilmPass } from "three/examples/jsm/postprocessing/FilmPass.js" // CRT effect
 
-import useStore from "~/store"
+import useStore from "@/store"
 
 extend({
   OrbitControls,

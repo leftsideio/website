@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Layout from "~/components/Layout"
-import SEO from "~/components/SEO"
-import Splash from "~/components/Splash"
+import Layout from "@/components/Layout"
+import SEO from "@/components/SEO"
+import Splash from "@/components/Splash"
 
 const IndexPage = () => (
   <Layout>

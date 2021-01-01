@@ -1,6 +1,6 @@
-import { Switch } from "~/components/buttons"
-import { COLORS, setCSSProp } from "~/style"
-import useStore from "~/store"
+import { Switch } from "@/components/buttons"
+import { COLORS, setCSSProp } from "@/style"
+import useStore from "@/store"
 
 const ColorMode = () => {
   const setter = useStore(state => state.setter)

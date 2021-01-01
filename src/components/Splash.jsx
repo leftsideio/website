@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { ColorMode } from "~/components/widgets"
+import { ColorMode } from "@/components/widgets"
 
 const Splash = () => (
   <Container>

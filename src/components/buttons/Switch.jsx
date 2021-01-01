@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { useTransition, animated } from "react-spring"
-import { Icon as I } from "~/components/media"
+import { Icon as I } from "@/components/media"
 
 const Switch = ({ on, off, cb }) => {
   const [isSwitchOn, setSwitchOn] = useState(true) // todo: come from localStorage / external settings

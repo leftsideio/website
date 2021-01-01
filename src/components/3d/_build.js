@@ -1,10 +1,10 @@
 // synthwave
 import * as THREE from "three"
-import { randomize, mergeBufferGeometries, loadSVG } from "~/utils/3d"
+import { randomize, mergeBufferGeometries, loadSVG } from "@/utils/3d"
 import { SceneUtils } from "three/examples/jsm/utils/SceneUtils"
-import sunSVG from "~/assets/images/3d/sun.svg"
-import cityCloseSVG from "~/assets/images/3d/city-close.svg"
-import cityFarSVG from "~/assets/images/3d/city-far.svg"
+import sunSVG from "@/assets/images/3d/sun.svg"
+import cityCloseSVG from "@/assets/images/3d/city-close.svg"
+import cityFarSVG from "@/assets/images/3d/city-far.svg"
 
 // lots of code taken directly from -> https://github.com/Moukrea/retrowave-scene/blob/master/retrowave_scene.js
 export function roadlines() {

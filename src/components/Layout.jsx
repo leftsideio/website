@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { GlobalStyle } from "~/style"
+import { GlobalStyle } from "@/style"
 
 const Layout = ({ children }) => {
   return (

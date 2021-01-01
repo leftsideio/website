@@ -1,7 +1,7 @@
 import * as THREE from "three"
 import create from "zustand"
 import produce, { setAutoFreeze } from "immer"
-import * as _build from "~/components/3d/_build"
+import * as _build from "@/components/3d/_build"
 
 setAutoFreeze(false)
 
