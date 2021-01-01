@@ -9,7 +9,7 @@ const Icon = ({ name, style, ...rest }) => {
   const Icon = icons.find(icon => icon.name === name).file
   return (
     <Icon
-      style={{ color: "var(--icon-color)", fill: "currentColor", ...style }}
+      style={{ color: "var(--color-icon)", fill: "currentColor", ...style }}
       {...rest}
     />
   )

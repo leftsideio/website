@@ -1,10 +1,12 @@
 export const COLORS = {
   light: {
-    background: "#efefef",
-    text: "#110d1e",
+    backgroundColor: "#efefef",
+    textColor: "#110d1e",
+    iconColor: "#110d1e",
   },
   dark: {
-    background: "#000",
-    text: "#efefef",
+    backgroundColor: "#000",
+    textColor: "#efefef",
+    iconColor: "#efefef",
   },
 }

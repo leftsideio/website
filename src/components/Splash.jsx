@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Switch } from "~/components/buttons"
+import { ColorMode } from "~/components/widgets"
 
 const Splash = () => (
   <Container>
@@ -16,7 +16,7 @@ const Splash = () => (
       Which is to say: we build it your way. Using the right methodologies, technologies,
       and tools. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </Subtext>
-    <Switch />
+    <ColorMode />
   </Container>
 )
 

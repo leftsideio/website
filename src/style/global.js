@@ -5,9 +5,9 @@ import { COLORS } from "./constants"
 const GlobalStyle = createGlobalStyle`
 ${cssReset}
 :root {
-  --color-text: ${COLORS.light.text};
-  --color-background: ${COLORS.light.background};
-  --icon-color: red;
+  --color-text: ${COLORS.light.textColor};
+  --color-background: ${COLORS.light.backgroundColor};
+  --color-icon: ${COLORS.light.iconColor};
 }
 *,
 *:before,
