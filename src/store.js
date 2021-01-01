@@ -10,7 +10,9 @@ const immer = config => (set, get, api) => config(fn => set(produce(fn)), get, a
 const useStore = create(
   immer((set, get) => {
     return {
+      setter: set,
       sound: false,
+      mode: "light",
       synthwave: {
         camera: undefined,
         clock: new THREE.Clock(false),

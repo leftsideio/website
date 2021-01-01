@@ -5,9 +5,14 @@ const icons = svgs.keys().map(path => ({
   file: svgs(path).default,
 }))
 
-const Icon = ({ name, ...rest }) => {
+const Icon = ({ name, style, ...rest }) => {
   const Icon = icons.find(icon => icon.name === name).file
-  return <Icon {...rest} />
+  return (
+    <Icon
+      style={{ color: "var(--icon-color)", fill: "currentColor", ...style }}
+      {...rest}
+    />
+  )
 }
 
 export default Icon
