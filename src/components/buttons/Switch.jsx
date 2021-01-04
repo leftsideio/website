@@ -39,6 +39,9 @@ const Switch = ({ on, off, cb }) => {
 export default Switch
 
 const Box = styled.button`
+  background: transparent;
+  height: 5rem;
+  width: 5rem;
   border: none;
   outline: none;
   position: relative;
@@ -48,7 +51,8 @@ const Box = styled.button`
 `
 const Icon = styled(animated(I))`
   position: absolute;
+  top: 0;
   left: 0;
-  height: 5rem;
-  width: 5rem;
+  width: 100%;
+  height: 100%;
 `
