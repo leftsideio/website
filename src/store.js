@@ -11,7 +11,7 @@ const useStore = create(
   immer((set, get) => {
     return {
       setter: set,
-      sound: false,
+      sound: true,
       mode: "light",
       synthwave: {
         camera: undefined,

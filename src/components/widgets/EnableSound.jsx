@@ -4,18 +4,22 @@ import useSound from "use-sound"
 import { Icon as I } from "@/components/media"
 import onSfx from "#/sounds/sound-on.mp3"
 import offSfx from "#/sounds/sound-off.mp3"
+import useStore from "@/store"
 
 const EnableSound = () => {
-  const [isEnable, setEnable] = useState(true)
+  const { sound, setter } = useStore(state => ({
+    sound: state.sound,
+    setter: state.setter,
+  }))
   const [playOn] = useSound(onSfx)
   const [playOff] = useSound(offSfx)
   return (
     <Icon
-      name={`volume-${isEnable ? "on" : "off"}`}
+      name={`volume-${sound ? "on" : "off"}`}
       onClick={() => {
-        const playSound = isEnable ? playOff : playOn
+        const playSound = sound ? playOff : playOn
         playSound()
-        setEnable(!isEnable)
+        setter(state => void (state.sound = !sound))
       }}
     />
   )

@@ -5,8 +5,9 @@ import useSound from "use-sound"
 import { Icon as I } from "@/components/media"
 import onSfx from "#/sounds/switch-on.mp3"
 import offSfx from "#/sounds/switch-off.mp3"
-
+import useStore from "@/store"
 const Switch = ({ on, off, cb }) => {
+  const isSoundOn = useStore(state => state.sound)
   const [isSwitchOn, setSwitchOn] = useState(true) // todo: come from localStorage / external settings
   const [playOn] = useSound(onSfx)
   const [playOff] = useSound(offSfx)
@@ -22,7 +23,7 @@ const Switch = ({ on, off, cb }) => {
 
   const onSwitchClick = () => {
     const playSound = isSwitchOn ? playOff : playOn
-    playSound()
+    if (isSoundOn) playSound()
     setSwitchOn(!isSwitchOn)
     cb(!isSwitchOn)
   }
