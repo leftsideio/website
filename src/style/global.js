@@ -1,10 +1,12 @@
 import { createGlobalStyle } from "styled-components"
 import cssReset from "styled-reset"
-import { COLORS } from "./constants"
+import { COLORS, LAYOUT } from "./constants"
 
 const GlobalStyle = createGlobalStyle`
 ${cssReset}
 :root {
+  --layout-site-width: ${LAYOUT.maxWidth};
+  --layout-navbar-height: ${LAYOUT.topBarHeight};
   --color-text: ${COLORS.light.textColor};
   --color-background: ${COLORS.light.backgroundColor};
   --color-icon: ${COLORS.light.iconColor};

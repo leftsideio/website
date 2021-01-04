@@ -29,7 +29,7 @@ export default EnableSound
 
 const Icon = styled(I)`
   height: auto;
-  width: 5rem;
+  width: 3rem;
   &:hover {
     cursor: pointer;
   }

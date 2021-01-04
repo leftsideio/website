@@ -41,8 +41,8 @@ export default Switch
 
 const Box = styled.button`
   background: transparent;
-  height: 5rem;
-  width: 5rem;
+  height: 3rem;
+  width: 3rem;
   border: none;
   outline: none;
   position: relative;

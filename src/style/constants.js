@@ -10,3 +10,8 @@ export const COLORS = {
     iconColor: "#efefef",
   },
 }
+
+export const LAYOUT = {
+  maxWidth: "1400px",
+  topBarHeight: "10rem",
+}

@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-import { ColorMode, EnableSound } from "@/components/widgets"
 import useStore from "@/store"
 
 const Splash = () => {
@@ -16,11 +15,9 @@ const Splash = () => {
         way.
       </Text>
       <Subtext>
-        Which is to say: we build it your way. Using the right methodologies,
-        technologies, and tools. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Which is to say: we build it your way. Using the right technology and tools. Lorem
+        ipsum dolor sit amet, consectetur adipiscing elit.
       </Subtext>
-      <ColorMode />
-      <EnableSound />
     </Container>
   )
 }
@@ -30,9 +27,9 @@ export default Splash
 const Container = styled.section`
   margin: 0 auto;
   position: relative;
-  max-width: 1200px;
+  max-width: var(--layout-site-width);
   width: 100%;
-  height: 100%;
+  height: calc(100vh - var(--layout-navbar-height));
   display: flex;
   align-items: flex-start;
   justify-content: center;

@@ -1,11 +1,15 @@
 import styled from "styled-components"
 import { GlobalStyle } from "@/style"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
+      <Navbar />
       <Main>{children}</Main>
+      <Footer />
     </>
   )
 }
@@ -14,12 +18,6 @@ export default Layout
 
 const Main = styled.main`
   position: relative;
-  min-height: 100vh;
   margin: 0 auto;
-  /* max-width: 960px; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   overflow: hidden;
 `
