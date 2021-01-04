@@ -1,24 +1,29 @@
-import styled from "styled-components"
-import { ColorMode } from "@/components/widgets"
+import styled, { css } from "styled-components"
+import { ColorMode, EnableSound } from "@/components/widgets"
+import useStore from "@/store"
 
-const Splash = () => (
-  <Container>
-    <Text>We build</Text>
-    <Text>software</Text>
-    <Text>
-      the
-      <Neon>
-        <a>Right</a>
-      </Neon>
-      way.
-    </Text>
-    <Subtext>
-      Which is to say: we build it your way. Using the right methodologies, technologies,
-      and tools. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </Subtext>
-    <ColorMode />
-  </Container>
-)
+const Splash = () => {
+  const mode = useStore(state => state.mode)
+  return (
+    <Container>
+      <Text>We build</Text>
+      <Text>software</Text>
+      <Text>
+        the
+        <Neon $isDark={mode === "dark"}>
+          <a>Right</a>
+        </Neon>
+        way.
+      </Text>
+      <Subtext>
+        Which is to say: we build it your way. Using the right methodologies,
+        technologies, and tools. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </Subtext>
+      <ColorMode />
+      <EnableSound />
+    </Container>
+  )
+}
 
 export default Splash
 
@@ -58,13 +63,16 @@ const Neon = styled.p`
   margin-right: 1rem;
   display: inline-block;
   font-size: 8rem;
-
   a {
     font-family: "Neoneon";
     color: #fe00fe;
-    /* animation: neon 1.5s ease-in-out infinite alternate; */
     text-decoration: none;
-    /* transition: all 0.4s; */
+    ${({ $isDark }) =>
+      $isDark &&
+      css`
+        color: white;
+        animation: neon 1.5s ease-in-out infinite alternate;
+      `}
   }
 
   @keyframes neon {
