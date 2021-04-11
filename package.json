@@ -14,7 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ignore-path .gitignore --ext .ts,.tsx,.js"
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
     "@svgr/webpack": "^5.4.0",
