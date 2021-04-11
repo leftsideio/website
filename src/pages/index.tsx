@@ -1,22 +1,15 @@
-import styled from "styled-components"
+import { PageProps } from "gatsby"
 import Layout from "@/components/Layout"
 import SEO from "@/components/SEO"
 import Splash from "@/components/Splash"
+import Philo from "@/components/Philo"
 
-const IndexPage = () => (
+const IndexPage: React.FC<PageProps> = () => (
   <Layout>
     <SEO title="Leftside" />
     <Splash />
+    <Philo />
   </Layout>
 )
 
 export default IndexPage
-
-const Mac = styled.img`
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  max-width: 60rem;
-  height: auto;
-  transform: translateX(-50%);
-`

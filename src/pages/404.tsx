@@ -1,7 +1,8 @@
+import { PageProps } from "gatsby"
 import Layout from "@/components/Layout"
 import SEO from "@/components/SEO"
 
-const NotFoundPage = () => (
+const Error404Page: React.FC<PageProps> = () => (
   <Layout>
     <SEO title="404: Not found" />
     <h1>NOT FOUND</h1>
@@ -9,4 +10,4 @@ const NotFoundPage = () => (
   </Layout>
 )
 
-export default NotFoundPage
+export default Error404Page
