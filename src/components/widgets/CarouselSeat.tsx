@@ -4,21 +4,19 @@ import styled, { css } from "styled-components"
 import { Neon } from "@/components/media"
 import { ColorMode } from "@/components/widgets"
 
-type CarouselProps = { children: React.ReactNode; stops: number[]; isLast?: boolean; initVis?: string }
+type CarouselProps = { children: React.ReactNode; stops: number[]; isEnd?: boolean; isStart?: boolean }
 
-const CarouselSeat = ({ children, stops, isLast, initVis = "hidden" }: CarouselProps) => {
-  const [vis, setVis] = useState(initVis)
+const CarouselSeat = ({ children, stops, isEnd, isStart }: CarouselProps) => {
+  const [opacity, setOpacity] = useState(isStart ? 1 : 0)
   const { scrollYProgress } = useViewportScroll()
-  const values = isLast ? [1, 1] : [1, 0]
-  const opacity = useTransform(scrollYProgress, stops, values)
   useEffect(() => {
-    return scrollYProgress.onChange(x => {
-      const compare = stops[0]
-      setVis(x < compare ? "hidden" : "visible")
+    return scrollYProgress.onChange(y => {
+      const compare = isStart ? y < stops[1] : isEnd ? y > stops[0] : y >= stops[0] && y <= stops[1]
+      setOpacity(compare ? 1 : 0)
     })
   }, [scrollYProgress])
 
-  return <Section style={{ opacity, visibility: vis }}>{children}</Section>
+  return <Section style={{ opacity, visibility: opacity ? "visible" : "hidden" }}>{children}</Section>
 }
 
 export default CarouselSeat

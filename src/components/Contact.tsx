@@ -8,7 +8,7 @@ import { useCarouselSeat } from "@/hooks"
 const Contact: React.FC = () => {
   const { isOn } = useCarouselSeat({ comparator: pos => pos >= 0.75 })
   return (
-    <CarouselSeat isLast stops={[0.75, 1]}>
+    <CarouselSeat isEnd stops={[0.75, 1]}>
       <div />
       <TextScene $isOn={isOn}>
         <Text>This is contact.</Text>

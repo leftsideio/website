@@ -8,7 +8,7 @@ import { useCarouselSeat } from "@/hooks"
 const Intro: React.FC = () => {
   const { isOn } = useCarouselSeat({ comparator: pos => pos <= 0.25 })
   return (
-    <CarouselSeat stops={[0, 0.25]} initVis="visible">
+    <CarouselSeat stops={[0, 0.25]} isStart>
       <div />
       <TextScene $isOn={isOn}>
         <Text>We build</Text>
