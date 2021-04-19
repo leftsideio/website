@@ -11,7 +11,7 @@ const Switch = ({ on, off, cb }) => {
   const [isSwitchOn, setSwitchOn] = useState(true) // todo: come from localStorage / external settings
   const [playOn] = useSound(onSfx)
   const [playOff] = useSound(offSfx)
-  const transitions = useTransition(isSwitchOn, null, {
+  const transitions = useTransition(isSwitchOn, {
     config: {
       tension: 300,
       friction: 10,
@@ -30,7 +30,7 @@ const Switch = ({ on, off, cb }) => {
 
   return (
     <Box onClick={onSwitchClick}>
-      {transitions.map(({ item, key, props }) => (
+      {transitions((props, item, key) => (
         <Icon key={key} name={item ? on.icon : off.icon} style={props} />
       ))}
     </Box>

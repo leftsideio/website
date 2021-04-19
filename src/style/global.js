@@ -19,18 +19,21 @@ ${cssReset}
   box-sizing: inherit;
 }
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%;
   min-width: 100vw;
   min-height: 100vh;
-  height: 100%;
-  width: 100%;
   overflow-x: hidden;
+  /* -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  &::-webkit-scrollbar {
+  display: none;
+  } */
   @media (max-width: 500px) {
     font-size: 56.25%;
   }
   @media (max-width: 420px) {
     font-size: 50%;
-
   }
 }
 body {
@@ -41,8 +44,6 @@ body {
   font-weight: 400;
   font-style: normal;
   box-sizing: border-box;
-  height: 100%;
-  width: 100%;
 }
 h1,
 h2,

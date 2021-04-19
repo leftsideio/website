@@ -12,6 +12,6 @@ export const COLORS = {
 }
 
 export const LAYOUT = {
-  maxWidth: "1400px",
+  maxWidth: "1200px",
   topBarHeight: "10rem",
 }
