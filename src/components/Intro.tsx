@@ -1,23 +1,16 @@
-import { useViewportScroll } from "framer-motion"
-import { useEffect, useState } from "react"
-import styled, { keyframes, css } from "styled-components"
+import styled from "styled-components"
 import { Neon } from "@/components/media"
 import { ColorMode, CarouselSeat } from "@/components/widgets"
+import { TextScene } from "@/components/common"
+import { useCarouselSeat } from "@/hooks"
 // import useStore from "@/store"
 
 const Intro: React.FC = () => {
-  const { scrollYProgress } = useViewportScroll()
-  const [isVis, setVis] = useState(true)
-  useEffect(() => {
-    return scrollYProgress.onChange(x => {
-      if (x <= 0.25) setVis(true)
-      else setVis(false)
-    })
-  }, [scrollYProgress])
+  const { isOn } = useCarouselSeat({ comparator: pos => pos <= 0.25 })
   return (
     <CarouselSeat stops={[0, 0.25]} initVis="visible">
       <div />
-      <Wrap $vis={isVis}>
+      <TextScene $isOn={isOn}>
         <Text>We build</Text>
         <Text>software</Text>
         <Text>
@@ -30,31 +23,13 @@ const Intro: React.FC = () => {
           consectetur adipiscing elit.
         </Subtext>
         <ColorMode />
-      </Wrap>
+      </TextScene>
     </CarouselSeat>
   )
 }
 
 export default Intro
 
-const zoom = keyframes`
-  from {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-
-  50% {
-    opacity: 1;
-  }
-  `
-
-const Wrap = styled.div`
-  ${({ $vis }) =>
-    $vis &&
-    css`
-      animation: ${zoom} 0.4s;
-    `}
-`
 const Text = styled.h1`
   font-feature-settings: "smcp";
   font-size: 8rem;

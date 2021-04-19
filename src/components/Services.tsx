@@ -1,22 +1,19 @@
-import { useViewportScroll } from "framer-motion"
-import { useEffect } from "react"
 import styled from "styled-components"
 // import { Neon } from "@/components/media"
 import { CarouselSeat } from "@/components/widgets"
+import { TextScene } from "@/components/common"
+import { useCarouselSeat } from "@/hooks"
 // import useStore from "@/store"
 
 const Services: React.FC = () => {
-  const { scrollYProgress } = useViewportScroll()
-  // useEffect(() => {
-  //   return scrollYProgress.onChange(x => {})
-  // }, [scrollYProgress])
+  const { isOn } = useCarouselSeat({ comparator: pos => pos >= 0.5 && pos <= 0.75 })
   return (
     <CarouselSeat stops={[0.5, 0.75]}>
       <div />
-      <div>
+      <TextScene $isOn={isOn}>
         <Text>This is services.</Text>
         <Subtext>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Subtext>
-      </div>
+      </TextScene>
     </CarouselSeat>
   )
 }
