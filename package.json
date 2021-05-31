@@ -19,6 +19,7 @@
   "dependencies": {
     "@react-spring/core": "^9.2.1",
     "@react-spring/three": "^9.2.1",
+    "@react-spring/web": "^9.2.1",
     "@react-three/drei": "^5.3.0",
     "@react-three/fiber": "^6.2.2",
     "@svgr/webpack": "^5.4.0",
