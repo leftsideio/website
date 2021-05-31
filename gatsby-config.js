@@ -45,7 +45,7 @@ module.exports = {
         background_color: `#fcfcfc`,
         theme_color: `#fcfcfc`,
         display: `minimal-ui`,
-        icon: `src/assets/images/favicon/logo.png`,
+        icon: `src/assets/images/favicon.svg`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
