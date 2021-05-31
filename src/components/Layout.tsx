@@ -1,12 +1,14 @@
 import styled from "styled-components"
 import { GlobalStyle } from "@/style"
 import { Backdrop } from "@/components/media"
+import left from "@/assets/images/logo-full.svg"
 const Layout: React.FC = ({ children }) => {
   return (
     <>
       <GlobalStyle />
       <Backdrop />
       <Main>{children}</Main>
+      <Logo src={left} />
     </>
   )
 }
@@ -19,4 +21,11 @@ const Main = styled.main`
   height: 100%;
   min-width: 100vw;
   width: 100%;
+`
+const Logo = styled.img`
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  height: auto;
+  width: 8rem;
 `
