@@ -18,15 +18,6 @@ module.exports = {
         display: "swap",
       },
     },
-    {
-      resolve: "gatsby-plugin-web-font-loader",
-      options: {
-        custom: {
-          families: ["Neoneon"],
-          urls: ["/fonts/fonts.css"],
-        },
-      },
-    },
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-svgr",
     {
