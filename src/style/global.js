@@ -40,7 +40,7 @@ body {
   position: relative;
   background: var(--color-background);
   color: var(--color-text);
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 400;
   font-style: normal;
   box-sizing: border-box;
@@ -54,10 +54,14 @@ h6 {
   font-family: 'Orbitron', sans-serif;
   font-weight: 500;
 }
-/* code {
-  font-family: 'IBM Plex Mono', monospace;
+input {
+  font-family: 'Orbitron', sans-serif;
   font-weight: 500;
-} */
+}
+::placeholder {
+    color: #2d2a32;
+filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
+}
 ::selection {}
 `
 

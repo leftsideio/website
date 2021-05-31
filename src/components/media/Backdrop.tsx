@@ -1,4 +1,3 @@
-import React from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
@@ -8,7 +7,7 @@ const Backdrop = () => {
   const { placeholderImage } = useStaticQuery(
     graphql`
       query {
-        placeholderImage: file(relativePath: { eq: "wall.jpg" }) {
+        placeholderImage: file(relativePath: { eq: "stars.jpg" }) {
           childImageSharp {
             gatsbyImageData(width: 1200, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
           }
@@ -18,41 +17,24 @@ const Backdrop = () => {
   )
   const pluginImage = getImage(placeholderImage)
   return (
-    <>
+    <Box>
       <Background image={pluginImage} style={{ minWidth: 400, minHeight: 800 }} />
-      <Grad />
-      <Gradient />
-    </>
+    </Box>
   )
 }
 
 export default Backdrop
 
-const Grad = styled.div`
-  position: fixed;
+const Box = styled.div`
+  z-index: -1;
+  position: absolute;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: radial-gradient(circle, transparent, #020016);
-`
-const Gradient = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  background: radial-gradient(circle at 35% 50%, rgba(255, 42, 109, 0.6) 10%, rgba(255, 42, 109, 0.2) 20%, #020016 30%);
-  opacity: 0.2;
-  //#020016
-  /* opacity: 0; */
 `
 const Background = styled(BgImage)`
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  filter: brightness(0.2);
-  /* filter: brightness(2); */
+  height: 100%;
+  width: 100%;
+  filter: invert(100%) opacity(100%) contrast(200%);
 `

@@ -1,50 +1,93 @@
-import styled from "styled-components"
-import { Neon } from "@/components/media"
-import { ColorMode, CarouselSeat } from "@/components/widgets"
-import { TextScene } from "@/components/common"
-import { useCarouselSeat } from "@/hooks"
-// import useStore from "@/store"
+import { useState } from "react"
+import styled, { css } from "styled-components"
+import { useSpring } from "@react-spring/core"
+import { a as web } from "@react-spring/web"
+import Laptop from "@/components/3d/Laptop"
 
 const Intro: React.FC = () => {
-  const { isOn } = useCarouselSeat({ comparator: pos => pos <= 0.25 })
+  const [open, setOpen] = useState(false)
+  const props = useSpring({ open: Number(open) })
   return (
-    <CarouselSeat stops={[0, 0.25]} isStart>
-      <div />
-      <TextScene $isOn={isOn}>
-        <Text>We build</Text>
-        <Text>software</Text>
-        <Text>
-          the
-          <Neon>Right</Neon>
-          way.
-        </Text>
-        <Subtext>
-          Which is to say: we build it your way. Using the right technology and tools. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit.
-        </Subtext>
-        <ColorMode />
-      </TextScene>
-    </CarouselSeat>
+    <>
+      <About
+        style={{
+          opacity: props.open.to([0, 1], [1, 0]),
+          transform: props.open.to(o => `translate3d(-50%,${o * 50 - 160}px,0)`),
+        }}
+      >
+        <Left>
+          <span>LEFTSIDE</span>
+        </Left>
+        <Description>
+          Full service software development studio delivering timeless products via the technologies of the future.
+        </Description>
+      </About>
+
+      <Laptop open={open} setOpen={setOpen} />
+      {open && (
+        <Form>
+          <Input type="text" placeholder="Enter name" />
+          {/* <Input type="email" placeholder="Email" /> */}
+        </Form>
+      )}
+    </>
   )
 }
 
 export default Intro
 
-const Text = styled.h1`
-  font-feature-settings: "smcp";
-  font-size: 8rem;
-  line-height: 8.5rem;
-  /* text-transform: uppercase; */
-  /* span {
-    font-family: "Neoneon";
-    font-weight: normal
-    font-size: 8rem;
-  } */
-`
+const About = styled(web.div)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 
-const Subtext = styled.p`
-  margin-top: 2rem;
-  max-width: 60rem;
+  display: grid;
+  grid-template-columns: min-content;
+  grid-row-gap: 2rem;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+`
+const Left = styled(web.h1)`
+  justify-self: start;
+  color: #2d2a32;
+  font-size: 10rem;
+  span {
+    filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
+  }
+`
+const Description = styled(web.p)`
+  font-size: 4rem;
+  line-height: 5rem;
+`
+const Form = styled.div`
+  padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.7);
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+const Input = styled.input`
+  text-align: center;
+  margin: 2rem 0;
   font-size: 3rem;
-  line-height: 4rem;
+  filter: drop-shadow(1rem 1rem 0 rgba(0, 0, 0, 1)) drop-shadow(-1rem -1rem 0 rgba(0, 0, 0, 1));
+  border: none;
+  padding: 1rem;
+  outline: none;
+  &:focus {
+    filter: drop-shadow(1rem 1rem 0 rgba(1, 2, 123, 1)) drop-shadow(-1rem -1rem 0 rgba(1, 2, 123, 1));
+    &::placeholder {
+      color: #ebebeb;
+      filter: none;
+    }
+  }
 `
