@@ -54,13 +54,14 @@ h6 {
   font-family: 'Orbitron', sans-serif;
   font-weight: 500;
 }
-input {
+input, textarea {
+  color: #2D2A32;
   font-family: 'Orbitron', sans-serif;
   font-weight: 500;
 }
 ::placeholder {
-    color: #2d2a32;
-filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
+  color: #2d2a32;
+  filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
 }
 ::selection {}
 `
