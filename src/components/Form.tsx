@@ -8,41 +8,39 @@ import Input from "./Input"
 const Form: React.FC = () => {
   const { isLaptopOpen, step, isNextStep } = useSnapshot(state)
   // const springProps = useSpring({ open: Number(isLaptopOpen) })
-  if (isLaptopOpen)
-    return (
-      <Box $ready={isNextStep}>
-        {step === 1 && <Input type="text" placeholder="Enter name" param="name" requirement={str => str.length > 5} />}
-        {step === 2 && (
-          <Input
-            type="email"
-            placeholder="Enter email"
-            param="email"
-            requirement={str => {
-              console.log("validate email!")
-            }}
-          />
-        )}
-        {step === 3 && (
-          <Input
-            as="textarea"
-            rows="4"
-            placeholder="Enter message"
-            param="message"
-            style={{ resize: "none" }}
-            requirement={str => str.length > 1}
-          />
-        )}
-        <Next
-          onClick={() => {
-            ++state.step
-            state.isNextStep = false
-          }}
-        >
-          Next
-        </Next>
-      </Box>
-    )
-  else return null
+  if (!isLaptopOpen) return null
+  return (
+    <Box $ready={isNextStep}>
+      {step === 1 && <Input type="text" placeholder="Enter name" param="name" requirement={str => str.length > 5} />}
+      {step === 2 && (
+        <Input
+          type="email"
+          placeholder="Enter email"
+          param="email"
+          requirement={str => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str)}
+        />
+      )}
+      {step === 3 && (
+        <Input
+          as="textarea"
+          rows="4"
+          placeholder="Enter message"
+          param="message"
+          style={{ resize: "none" }}
+          requirement={str => str.length > 1}
+        />
+      )}
+      <Next
+        $show={isNextStep}
+        onClick={() => {
+          ++state.step
+          state.isNextStep = false
+        }}
+      >
+        Next
+      </Next>
+    </Box>
+  )
 }
 
 export default Form
@@ -70,4 +68,13 @@ const Box = styled.div`
       background: rgba(255, 102, 179, 0.8);
     `}
 `
-const Next = styled.button``
+const Next = styled.button`
+  opacity: 0;
+  visibility: hidden;
+  ${({ $show }) =>
+    $show &&
+    css`
+      opacity: 1;
+      visibility: visible;
+    `}
+`
