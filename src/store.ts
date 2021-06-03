@@ -7,4 +7,5 @@ export const state = proxy({
   name: "",
   email: "",
   message: "",
+  files: [],
 })

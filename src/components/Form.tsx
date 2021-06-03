@@ -5,13 +5,14 @@ import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
 import Input from "./Input"
+import FileDrop from "./FileDrop"
 const Form: React.FC = () => {
   const { isLaptopOpen, step, isNextStep } = useSnapshot(state)
   // const springProps = useSpring({ open: Number(isLaptopOpen) })
   if (!isLaptopOpen) return null
   return (
     <Box $ready={isNextStep}>
-      {step === 1 && <Input type="text" placeholder="Enter name" param="name" requirement={str => str.length > 5} />}
+      {step === 1 && <Input type="text" placeholder="Enter name" param="name" requirement={str => str.length >= 2} />}
       {step === 2 && (
         <Input
           type="email"
@@ -30,6 +31,7 @@ const Form: React.FC = () => {
           requirement={str => str.length > 1}
         />
       )}
+      {step === 4 && <FileDrop />}
       <Next
         $show={isNextStep}
         onClick={() => {
