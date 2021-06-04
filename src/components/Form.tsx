@@ -12,7 +12,13 @@ const Form: React.FC = () => {
   if (!isLaptopOpen) return null
   return (
     <Box $ready={isNextStep}>
-      <Navigate $back $show={step !== 1} onClick={() => --state.step}>
+      <Navigate
+        $back
+        $show={step !== 1}
+        onClick={() => {
+          if (step > 1) --state.step
+        }}
+      >
         Back
       </Navigate>
       {step === 1 && <Input type="text" placeholder="Enter name" param="name" requirement={str => str.length >= 2} />}
@@ -35,7 +41,13 @@ const Form: React.FC = () => {
         />
       )}
       {step === 4 && <FileDrop />}
-      <Navigate $show={isNextStep} onClick={() => ++state.step}>
+      {step === 5 && <Review />}
+      <Navigate
+        $show={isNextStep && step !== 5}
+        onClick={() => {
+          if (step < 5) ++state.step
+        }}
+      >
         Next
       </Navigate>
     </Box>
