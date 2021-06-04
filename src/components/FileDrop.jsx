@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import styled, { css } from "styled-components"
 import { useSnapshot } from "valtio"
@@ -31,6 +31,9 @@ const FileDrop = () => {
       setError("")
     },
   })
+  useEffect(() => {
+    state.isNextStep = true
+  }, [])
   return (
     <Container>
       <Droppy {...getRootProps({ isDragActive })}>
