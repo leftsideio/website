@@ -4,6 +4,8 @@ import styled, { css } from "styled-components"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
+import FileZone from "./FileZone"
+
 const maxUploadSize = 25000000
 
 const FileDrop = () => {
@@ -41,18 +43,12 @@ const FileDrop = () => {
         <Text>Click or drag files to upload</Text>
       </Droppy>
       {!!files.length && (
-        <FileZone>
-          {files.map(file => (
-            <File
-              key={file.path}
-              {...file}
-              onClick={e => {
-                e.stopPropagation()
-                state.files = files.filter(({ name }) => name !== file.name)
-              }}
-            />
-          ))}
-        </FileZone>
+        <FileZone
+          onClick={e => {
+            e.stopPropagation()
+            state.files = files.filter(({ name }) => name !== file.name)
+          }}
+        />
       )}
       {error && <Err>{error}</Err>}
     </Container>
@@ -60,10 +56,6 @@ const FileDrop = () => {
 }
 
 export default FileDrop
-
-const File = ({ name, onClick }) => {
-  return <FileWrap onClick={onClick}>{`${name.length > 22 ? "..." : ""}${name.slice(-22)}`}</FileWrap>
-}
 
 const getColor = props => {
   if (props.isDragActive) {
@@ -103,55 +95,7 @@ const Text = styled.h6`
   color: #2d2a32;
   filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
 `
-const FileZone = styled.div`
-  padding: 1rem;
-  border: 2px dashed #eee;
-  height: 6rem;
-  width: 45rem;
-  overflow-x: scroll;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-`
-const FileWrap = styled.p`
-  white-space: nowrap;
-  margin: 0 1rem;
-  padding: 5px;
-  font-size: 1.6rem;
-  background: white;
-  filter: drop-shadow(4px 4px 0 #2d2a32) drop-shadow(-4px -4px 0 #2d2a32);
-  position: relative;
-  transition: all 0.2s;
-  &:hover {
-    cursor: pointer;
-    filter: drop-shadow(4px 4px 0 #b80c09) drop-shadow(-4px -4px 0 #b80c09);
-    &:after {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-  &:after {
-    content: "DELETE";
-    background: white;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    font-family: Orbitron;
-    font-weight: 500;
-  }
-`
+
 const Err = styled.aside`
   color: #b80c09;
   justify-self: center;
