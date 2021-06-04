@@ -6,8 +6,10 @@ import { state } from "@/store"
 
 import Input from "./Input"
 import FileDrop from "./FileDrop"
+import Review from "./Review"
+
 const Form: React.FC = () => {
-  const { isLaptopOpen, step, isNextStep } = useSnapshot(state)
+  const { isLaptopOpen, step, isNextStep, message } = useSnapshot(state)
   // const springProps = useSpring({ open: Number(isLaptopOpen) })
   if (!isLaptopOpen) return null
   return (
@@ -31,14 +33,18 @@ const Form: React.FC = () => {
         />
       )}
       {step === 3 && (
-        <Input
-          as="textarea"
-          rows="4"
-          placeholder="Enter message"
-          param="message"
-          style={{ resize: "none" }}
-          requirement={str => str.length > 1}
-        />
+        <TextAreaWrap>
+          <Input
+            as="textarea"
+            rows="4"
+            placeholder="Enter message"
+            param="message"
+            style={{ resize: "none" }}
+            maxLength={500}
+            requirement={str => str.length > 1}
+          />
+          <WordLimit $show={message.length === 500}>Limit to 500 characters.</WordLimit>
+        </TextAreaWrap>
       )}
       {step === 4 && <FileDrop />}
       {step === 5 && <Review />}
@@ -92,5 +98,20 @@ const Navigate = styled.button`
     $back &&
     css`
       background: lightgrey;
+    `}
+`
+const TextAreaWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const WordLimit = styled.span`
+  align-self: flex-end;
+  opacity: 0;
+  visibility: hidden;
+  ${({ $show }) =>
+    $show &&
+    css`
+      opacity: 1;
+      visibility: visible;
     `}
 `
