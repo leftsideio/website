@@ -12,6 +12,9 @@ const Form: React.FC = () => {
   if (!isLaptopOpen) return null
   return (
     <Box $ready={isNextStep}>
+      <Navigate $back $show={step !== 1} onClick={() => --state.step}>
+        Back
+      </Navigate>
       {step === 1 && <Input type="text" placeholder="Enter name" param="name" requirement={str => str.length >= 2} />}
       {step === 2 && (
         <Input
@@ -32,15 +35,9 @@ const Form: React.FC = () => {
         />
       )}
       {step === 4 && <FileDrop />}
-      <Next
-        $show={isNextStep}
-        onClick={() => {
-          ++state.step
-          state.isNextStep = false
-        }}
-      >
+      <Navigate $show={isNextStep} onClick={() => ++state.step}>
         Next
-      </Next>
+      </Navigate>
     </Box>
   )
 }
@@ -56,7 +53,7 @@ const Box = styled.div`
   background: rgba(255, 255, 255, 0.6);
   width: 100vw;
   display: grid;
-  grid-template-columns: min-content min-content;
+  grid-template-columns: repeat(3, min-content);
   grid-column-gap: 3rem;
   align-content: center;
   justify-content: center;
@@ -70,7 +67,7 @@ const Box = styled.div`
       background: rgba(255, 102, 179, 0.8);
     `}
 `
-const Next = styled.button`
+const Navigate = styled.button`
   opacity: 0;
   visibility: hidden;
   ${({ $show }) =>
@@ -78,5 +75,10 @@ const Next = styled.button`
     css`
       opacity: 1;
       visibility: visible;
+    `}
+  ${({ $back }) =>
+    $back &&
+    css`
+      background: lightgrey;
     `}
 `

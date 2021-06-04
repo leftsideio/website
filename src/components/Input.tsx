@@ -1,9 +1,13 @@
+import { useEffect } from "react"
 import styled from "styled-components"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
 const Input = ({ param, requirement, ...rest }) => {
   const snap = useSnapshot(state, { sync: true })
+  useEffect(() => {
+    state.isNextStep = requirement(state[param])
+  }, [])
   return (
     <El
       value={snap[param]}
