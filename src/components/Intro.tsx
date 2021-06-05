@@ -5,7 +5,7 @@ import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
 const Intro: React.FC = () => {
-  const { isLaptopOpen } = useSnapshot(state)
+  const { isLaptopOpen, isEmailSent } = useSnapshot(state)
   const springProps = useSpring({ open: Number(isLaptopOpen) })
   return (
     <About
@@ -15,12 +15,23 @@ const Intro: React.FC = () => {
       }}
       $open={isLaptopOpen}
     >
-      <Left>
-        <span>LEFTSIDE</span>
-      </Left>
-      <Description>
-        Full service software development studio delivering timeless products while wielding tech of the future.
-      </Description>
+      {isEmailSent ? (
+        <>
+          <Head>
+            <span>EMAIL SENT</span>
+          </Head>
+          <SubHead>Looking forward to getting in touch shortly.</SubHead>
+        </>
+      ) : (
+        <>
+          <Head>
+            <span>LEFTSIDE</span>
+          </Head>
+          <SubHead>
+            Full service software development studio delivering timeless products while wielding tech of the future.
+          </SubHead>
+        </>
+      )}
     </About>
   )
 }
@@ -45,7 +56,7 @@ const About = styled(web.div)`
       visibility: hidden;
     `}
 `
-const Left = styled(web.h1)`
+const Head = styled(web.h1)`
   justify-self: start;
   color: #2d2a32;
   font-size: 10rem;
@@ -53,7 +64,7 @@ const Left = styled(web.h1)`
     filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
   }
 `
-const Description = styled(web.p)`
+const SubHead = styled(web.p)`
   font-size: 4rem;
   line-height: 5rem;
 `

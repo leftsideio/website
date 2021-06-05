@@ -71,7 +71,7 @@ const Box = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.75);
   width: 100vw;
   display: grid;
   grid-template-columns: repeat(3, min-content);

@@ -11,13 +11,17 @@ import { state } from "@/store"
 const vec = new THREE.Vector3()
 
 function Model({ open, hinge, ...props }) {
+  const { isEmailSent } = useSnapshot(state)
   const group = useRef()
   const text = useRef()
   // Load model
   const { nodes, materials } = useGLTF("/models/untitled.glb")
   // Take care of cursor state on hover
   const [hovered, setHovered] = useState(false)
-  useEffect(() => void (document.body.style.cursor = hovered ? "pointer" : "auto"), [hovered])
+  useEffect(() => {
+    if (isEmailSent) return
+    document.body.style.cursor = hovered ? "pointer" : "auto"
+  }, [hovered, isEmailSent])
   // Make it float in the air when it's opened
   useFrame(state => {
     const t = state.clock.getElapsedTime()
@@ -48,7 +52,7 @@ function Model({ open, hinge, ...props }) {
           <mesh material={materials["matte.001"]} geometry={nodes["Cube008_1"].geometry} />
           <mesh material={materials["screen.001"]} geometry={nodes["Cube008_2"].geometry} />
         </group>
-        {!open && (
+        {!open && !isEmailSent && (
           <mesh
             ref={text}
             geometry={nodes.Text.geometry}
@@ -69,7 +73,7 @@ function Model({ open, hinge, ...props }) {
 }
 
 export default function Laptop() {
-  const { isLaptopOpen } = useSnapshot(state)
+  const { isLaptopOpen, isEmailSent } = useSnapshot(state)
   // We turn this into a spring animation that interpolates between 0 and 1
   const springProps = useSpring({ open: Number(isLaptopOpen) })
   return (
@@ -85,6 +89,7 @@ export default function Laptop() {
             rotation={[0, Math.PI, 0]}
             onClick={e => {
               e.stopPropagation()
+              if (isEmailSent) return
               state.isLaptopOpen = !isLaptopOpen
             }}
           >

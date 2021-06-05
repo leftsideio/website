@@ -24,7 +24,7 @@ const Review: React.FC = () => {
         <Key>Message:</Key>
         <Value>{message}</Value>
         <Key $full>Attachments:</Key>
-        {!!files.length && <FileZone style={{ gridColumn: "1 / -1", marginTop: "-1rem" }} />}
+        {!!files.length && <FileZone style={{ gridColumn: "1 / -1", marginTop: "-1.5rem" }} />}
       </Content>
       <SubmitButton
         onClick={async () => {
@@ -44,10 +44,12 @@ const Review: React.FC = () => {
               },
             })
             if (!res.ok) throw new Error(`An error has occured: ${res.status}`)
-            const result = await res.text()
-            console.log(result)
+            state.isLaptopOpen = false
+            state.isEmailSent = true
           } catch (e) {
             console.log("ERROR", e)
+            state.isLaptopOpen = false
+            state.isEmailSent = true
           }
         }}
       >
@@ -107,14 +109,14 @@ const SubmitButton = styled.button`
   font-size: 2.6rem;
   background: white;
   border: none;
-  filter: drop-shadow(6px 6px 0 #2d2a32) drop-shadow(-6px -6px 0 #2d2a32);
-  transition: all 0.4s;
+  filter: drop-shadow(8px 8px 0 #2d2a32) drop-shadow(-8px -8px 0 #2d2a32);
+  transition: all 0.2s;
   span {
     filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
   }
   &:hover {
     cursor: pointer;
-    letter-spacing: 3px;
-    filter: drop-shadow(6px 6px 0 #2d2a32) drop-shadow(-6px -6px 0 #2d2a32);
+    letter-spacing: 2px;
+    filter: drop-shadow(10px 10px 0 #2d2a32) drop-shadow(-10px -10px 0 #2d2a32);
   }
 `

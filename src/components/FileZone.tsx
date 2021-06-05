@@ -27,9 +27,8 @@ const FileZone: React.FC<Props> = ({ onFileClick, style }) => {
 export default FileZone
 
 const Box = styled.div`
-  background: white;
   padding: 1rem;
-  border: 2px dashed #eee;
+  border-bottom: 2px dashed #2d2a32;
   height: 6rem;
   overflow-x: scroll;
   display: flex;
