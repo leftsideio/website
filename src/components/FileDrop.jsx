@@ -6,7 +6,7 @@ import { state } from "@/store"
 
 import FileZone from "./FileZone"
 
-const maxUploadSize = 25000000
+const maxUploadSize = 4000000
 
 const FileDrop = () => {
   const { files } = useSnapshot(state)
@@ -18,7 +18,7 @@ const FileDrop = () => {
       const merge = (a, b, p) => a.filter(aa => !b.find(bb => aa[p] === bb[p])).concat(b)
       const update = merge(state.files, files, "name")
       const size = update.reduce((acc, { size }) => acc + size, 0)
-      if (size > maxUploadSize) return setError("Maximum upload size of 25MB.")
+      if (size > maxUploadSize) return setError("Maximum upload size of 4MB.")
       state.files = ref(update)
       setError("")
     },
