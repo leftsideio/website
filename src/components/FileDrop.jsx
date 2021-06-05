@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDropzone } from "react-dropzone"
 import styled, { css } from "styled-components"
-import { useSnapshot } from "valtio"
+import { useSnapshot, ref } from "valtio"
 import { state } from "@/store"
 
 import FileZone from "./FileZone"
@@ -16,20 +16,10 @@ const FileDrop = () => {
     multiple: true,
     onDrop: files => {
       const merge = (a, b, p) => a.filter(aa => !b.find(bb => aa[p] === bb[p])).concat(b)
-      const update = merge(
-        state.files,
-        files.map(file => ({
-          path: file.path,
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          preview: URL.createObjectURL(file),
-        })),
-        "path"
-      )
+      const update = merge(state.files, files, "name")
       const size = update.reduce((acc, { size }) => acc + size, 0)
       if (size > maxUploadSize) return setError("Maximum upload size of 25MB.")
-      state.files = update
+      state.files = ref(update)
       setError("")
     },
   })
@@ -44,9 +34,9 @@ const FileDrop = () => {
       </Droppy>
       {!!files.length && (
         <FileZone
-          onClick={e => {
+          onFileClick={(e, file) => {
             e.stopPropagation()
-            state.files = files.filter(({ name }) => name !== file.name)
+            state.files = ref(files.filter(({ name }) => name !== file.name))
           }}
         />
       )}

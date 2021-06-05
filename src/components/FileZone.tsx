@@ -3,18 +3,22 @@ import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
 interface Props {
-  onClick?: () => void
+  onFileClick?: (e: any, file: any) => void
   style?: any
 }
 
-const FileZone: React.FC<Props> = ({ onClick, style }) => {
+const FileZone: React.FC<Props> = ({ onFileClick, style }) => {
   const { files } = useSnapshot(state)
   return (
     <Box style={style}>
       {files.map((file: any) => (
-        <File key={file.path} onClick={onClick} $doDelete={!!onClick}>{`${
-          file.name.length > 22 ? "..." : ""
-        }${file.name.slice(-22)}`}</File>
+        <File
+          key={file.path}
+          onClick={e => {
+            if (onFileClick) onFileClick(e, file)
+          }}
+          $doDelete={!!onFileClick}
+        >{`${file.name.length > 22 ? "..." : ""}${file.name.slice(-22)}`}</File>
       ))}
     </Box>
   )
