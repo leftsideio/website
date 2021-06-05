@@ -5,3 +5,5 @@ yarn-error.log
 .cache/
 public
 .env*
+# Local Netlify folder
+.netlify
