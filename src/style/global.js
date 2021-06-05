@@ -10,7 +10,6 @@ ${cssReset}
   --color-text: ${COLORS.light.textColor};
   --color-background: ${COLORS.light.backgroundColor};
   --color-icon: ${COLORS.light.iconColor};
-  --ribbon-background: #fff;
 }
 *,
 *:before,

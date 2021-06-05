@@ -3,7 +3,6 @@ import { useDropzone } from "react-dropzone"
 import styled, { css } from "styled-components"
 import { useSnapshot, ref } from "valtio"
 import { state } from "@/store"
-import { setCSSProp, COLORS } from "@/style"
 import FileZone from "./FileZone"
 
 const maxUploadSize = 4000000
@@ -25,7 +24,6 @@ const FileDrop = () => {
   })
   useEffect(() => {
     state.isNextStep = true
-    setCSSProp("--ribbon-background", COLORS.light.inputs.dropzone.readyBorderColor)
   }, [])
 
   return (

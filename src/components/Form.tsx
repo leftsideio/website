@@ -1,6 +1,4 @@
-import { useLayoutEffect, useState } from "react"
 import styled, { css } from "styled-components"
-import { rgba } from "polished"
 // import { useSpring } from "@react-spring/core"
 // import { a as web } from "@react-spring/web"
 import { useSnapshot } from "valtio"
@@ -14,15 +12,11 @@ import { Icon } from "@/components/media"
 const Form: React.FC = () => {
   const { isLaptopOpen, step, isNextStep, message } = useSnapshot(state)
   // const springProps = useSpring({ open: Number(isLaptopOpen) })
-  const [ribbon, setRibbon] = useState("#fff")
-  useLayoutEffect(() => {
-    setRibbon(getComputedStyle(document.documentElement).getPropertyValue("--ribbon-background"))
-  }, [isNextStep, step])
 
   if (!isLaptopOpen) return null
 
   return (
-    <Box $rib={ribbon}>
+    <Box>
       <Navigate
         $back
         $show={step !== 1}
@@ -77,7 +71,7 @@ const Box = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: ${({ $rib }) => rgba($rib, 0.9)};
+  background: rgba(255, 255, 255, 0.6);
   width: 100vw;
   display: grid;
   grid-template-columns: repeat(3, min-content);
