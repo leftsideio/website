@@ -4,6 +4,14 @@ import { state } from "@/store"
 
 import FileZone from "./FileZone"
 
+const toBase64 = (file: any): Promise<any> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+
 const Review: React.FC = () => {
   const { name, email, message, files } = useSnapshot(state)
   return (
@@ -17,7 +25,31 @@ const Review: React.FC = () => {
         <Value>{message}</Value>
         {!!files.length && <FileZone style={{ gridColumn: "1 / -1" }} />}
       </Content>
-      <SubmitButton onClick={() => console.log("SEND EMAIL VIA NETLIFY FUNCTIONS?")}>
+      <SubmitButton
+        onClick={async () => {
+          try {
+            const based: string[] = []
+            for (const file of files) {
+              const lilB = await toBase64(file)
+              based.push(lilB)
+            }
+            console.log(based)
+            const res = await fetch("/.netlify/functions/send-email", {
+              method: "POST",
+              body: JSON.stringify({ name, email, message, files: based }),
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            })
+            if (!res.ok) throw new Error(`An error has occured: ${res.status}`)
+            const result = await res.text()
+            console.log(result)
+          } catch (e) {
+            console.log("ERROR", e)
+          }
+        }}
+      >
         <span>SEND EMAIL</span>
       </SubmitButton>
     </Box>

@@ -10,19 +10,18 @@ const transporter = nodemailer.createTransport({
   },
 })
 exports.handler = async function (event) {
-  const { name, email, message, fileData } = JSON.parse(event.body)
-  console.log(`Here are the files ${fileData}`)
-  fileData.map(file => console.log(file))
+  const { name, email, message, files } = JSON.parse(event.body)
+
   await transporter.sendMail({
     from: process.env.SMTP_USER,
     to: process.env.SMTP_USER,
     subject: `${name} - ${email}`,
     text: message,
-    // attachments: fileData.map(file => ({
-    //   filename: file.name,
-    //   contentType: file.type,
-    // })),
+    attachments: files.map(file => ({
+      path: file,
+    })),
   })
+
   return {
     statusCode: 200,
     body: "Hello world!",
