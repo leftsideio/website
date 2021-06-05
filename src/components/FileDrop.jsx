@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone"
 import styled, { css } from "styled-components"
 import { useSnapshot, ref } from "valtio"
 import { state } from "@/store"
-
+import { setCSSProp, COLORS } from "@/style"
 import FileZone from "./FileZone"
 
 const maxUploadSize = 4000000
@@ -25,7 +25,9 @@ const FileDrop = () => {
   })
   useEffect(() => {
     state.isNextStep = true
+    setCSSProp("--ribbon-background", COLORS.light.inputs.dropzone.readyBorderColor)
   }, [])
+
   return (
     <Container>
       <Droppy {...getRootProps({ isDragActive })}>
@@ -47,13 +49,6 @@ const FileDrop = () => {
 
 export default FileDrop
 
-const getColor = props => {
-  if (props.isDragActive) {
-    return "#2196f3"
-  }
-  return "#eeeeee"
-}
-
 const Container = styled.div`
   display: grid;
   grid-template-rows: min-content;
@@ -66,17 +61,16 @@ const Droppy = styled.div`
   justify-content: center;
   padding: 2rem;
   border-radius: 2px;
-  border-color: ${props => getColor(props)};
   background-color: #fafafa;
   outline: none;
-  transition: border 0.24s ease-in-out;
+  transition: all 0.24s ease-in-out;
   width: 45rem;
   height: 10rem;
   filter: drop-shadow(1rem 1rem 0 #2d2a32) drop-shadow(-1rem -1rem 0 #2d2a32);
   ${({ isDragActive }) =>
     isDragActive &&
     css`
-      filter: drop-shadow(1rem 1rem 0 #ff66b3) drop-shadow(-1rem -1rem 0 #ff66b3);
+      filter: drop-shadow(2rem 2rem 0 #2d2a32) drop-shadow(-2rem -2rem 0 #2d2a32);
     `}
 `
 

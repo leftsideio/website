@@ -1,6 +1,7 @@
 import { proxy, ref } from "valtio"
 
 export const state = proxy<any>({
+  isLaptopOpen: true,
   step: 1,
   isNextStep: false,
   name: "",

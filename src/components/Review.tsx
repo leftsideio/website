@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
@@ -23,7 +23,8 @@ const Review: React.FC = () => {
         <Value>{email}</Value>
         <Key>Message:</Key>
         <Value>{message}</Value>
-        {!!files.length && <FileZone style={{ gridColumn: "1 / -1" }} />}
+        <Key $full>Attachments:</Key>
+        {!!files.length && <FileZone style={{ gridColumn: "1 / -1", marginTop: "-1rem" }} />}
       </Content>
       <SubmitButton
         onClick={async () => {
@@ -85,6 +86,12 @@ const Content = styled.div`
 const Key = styled.h4`
   justify-self: end;
   font-size: 2rem;
+  ${({ $full }) =>
+    $full &&
+    css`
+      grid-column: 1 / -1;
+      justify-self: start;
+    `}
 `
 const Value = styled.p`
   max-width: 25rem;

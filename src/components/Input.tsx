@@ -1,13 +1,18 @@
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect } from "react"
 import styled from "styled-components"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
+import { setCSSProp, COLORS } from "@/style"
 
 const Input = ({ param, requirement, ...rest }) => {
   const snap = useSnapshot(state, { sync: true })
+  const { isNextStep } = snap
   useEffect(() => {
     state.isNextStep = requirement(state[param])
   }, [])
+  useLayoutEffect(() => {
+    setCSSProp("--ribbon-background", isNextStep ? COLORS.light.inputs[param].readyBorderColor : "#fff")
+  }, [isNextStep])
   return (
     <El
       value={snap[param]}
@@ -34,7 +39,6 @@ const El = styled.input`
   padding: 1rem;
   outline: none;
   &:focus {
-    filter: drop-shadow(1rem 1rem 0 #2d2a32) drop-shadow(-1rem -1rem 0 #2d2a32);
     &::placeholder {
       color: #ebebeb;
       filter: none;

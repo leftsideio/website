@@ -55,13 +55,12 @@ const File = styled.p`
     css`
       &:hover {
         cursor: pointer;
-        filter: drop-shadow(4px 4px 0 #b80c09) drop-shadow(-4px -4px 0 #b80c09);
+        filter: drop-shadow(4px 4px 0 #b10f2e) drop-shadow(-4px -4px 0 #b10f2e);
         &:after {
           opacity: 1;
           visibility: visible;
         }
       }
-
       &:after {
         content: "DELETE";
         background: white;

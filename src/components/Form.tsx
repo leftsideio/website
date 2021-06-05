@@ -1,4 +1,6 @@
+import { useLayoutEffect, useState } from "react"
 import styled, { css } from "styled-components"
+import { rgba } from "polished"
 // import { useSpring } from "@react-spring/core"
 // import { a as web } from "@react-spring/web"
 import { useSnapshot } from "valtio"
@@ -7,13 +9,20 @@ import { state } from "@/store"
 import Input from "./Input"
 import FileDrop from "./FileDrop"
 import Review from "./Review"
+import { Icon } from "@/components/media"
 
 const Form: React.FC = () => {
   const { isLaptopOpen, step, isNextStep, message } = useSnapshot(state)
   // const springProps = useSpring({ open: Number(isLaptopOpen) })
+  const [ribbon, setRibbon] = useState("#fff")
+  useLayoutEffect(() => {
+    setRibbon(getComputedStyle(document.documentElement).getPropertyValue("--ribbon-background"))
+  }, [isNextStep, step])
+
   if (!isLaptopOpen) return null
+
   return (
-    <Box $ready={isNextStep}>
+    <Box $rib={ribbon}>
       <Navigate
         $back
         $show={step !== 1}
@@ -68,7 +77,7 @@ const Box = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.6);
+  background: ${({ $rib }) => rgba($rib, 0.9)};
   width: 100vw;
   display: grid;
   grid-template-columns: repeat(3, min-content);
@@ -78,26 +87,44 @@ const Box = styled.div`
   align-items: center;
   justify-items: center;
   transition: all 0.4s;
-  ${({ $ready }) =>
-    $ready &&
-    css`
-      height: 100vh;
-      background: rgba(255, 102, 179, 0.8);
-    `}
 `
-const Navigate = styled.button`
+const Navigate = styled(Icon).attrs({ name: "left" })`
+  height: 8rem;
+  width: auto;
   opacity: 0;
   visibility: hidden;
+  overflow: visible;
+  transition: all 0.4s;
+
+  .left_svg__outer {
+    transform: translateX(4rem);
+    transition: all 0.4s;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: rotate(360deg);
+    .left_svg__outer {
+      transform: translateX(0);
+    }
+    /* .left_svg__outer,
+    .left_svg__inner {
+      fill: var(--input-border);
+    } */
+  }
+  ${({ $back }) =>
+    $back &&
+    css`
+      transform: rotate(-180deg);
+      &:hover {
+        transform: rotate(-540deg);
+      }
+      /* background: lightgrey; */
+    `}
   ${({ $show }) =>
     $show &&
     css`
       opacity: 1;
       visibility: visible;
-    `}
-  ${({ $back }) =>
-    $back &&
-    css`
-      background: lightgrey;
     `}
 `
 const TextAreaWrap = styled.div`
