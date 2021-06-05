@@ -88,31 +88,21 @@ const Navigate = styled(Icon).attrs({ name: "left" })`
   opacity: 0;
   visibility: hidden;
   overflow: visible;
-  transition: all 0.4s;
 
   .left_svg__outer {
     transform: translateX(4rem);
-    transition: all 0.4s;
+    transition: all 0.2s;
   }
   &:hover {
     cursor: pointer;
-    transform: rotate(360deg);
     .left_svg__outer {
       transform: translateX(0);
     }
-    /* .left_svg__outer,
-    .left_svg__inner {
-      fill: var(--input-border);
-    } */
   }
   ${({ $back }) =>
     $back &&
     css`
       transform: rotate(-180deg);
-      &:hover {
-        transform: rotate(-540deg);
-      }
-      /* background: lightgrey; */
     `}
   ${({ $show }) =>
     $show &&
