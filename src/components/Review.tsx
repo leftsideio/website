@@ -1,3 +1,4 @@
+import { useState } from "react"
 import styled, { css } from "styled-components"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
@@ -14,6 +15,7 @@ const toBase64 = (file: any): Promise<any> =>
 
 const Review: React.FC = () => {
   const { name, email, message, files } = useSnapshot(state)
+  const [isSending, setSending] = useState(false)
   return (
     <Box>
       <Content>
@@ -27,7 +29,9 @@ const Review: React.FC = () => {
         {!!files.length && <FileZone style={{ gridColumn: "1 / -1", marginTop: "-1.5rem" }} />}
       </Content>
       <SubmitButton
+        $sending={isSending}
         onClick={async () => {
+          setSending(true)
           try {
             const based: string[] = []
             for (const file of files) {
@@ -44,16 +48,15 @@ const Review: React.FC = () => {
               },
             })
             if (!res.ok) throw new Error(`An error has occured: ${res.status}`)
-            state.isLaptopOpen = false
-            state.isEmailSent = true
           } catch (e) {
             console.log("ERROR", e)
-            state.isLaptopOpen = false
-            state.isEmailSent = true
           }
+          setSending(false)
+          state.isLaptopOpen = false
+          state.isEmailSent = true
         }}
       >
-        <span>SEND EMAIL</span>
+        <span>{isSending ? "SENDING" : "SEND EMAIL"}</span>
       </SubmitButton>
     </Box>
   )
@@ -119,4 +122,17 @@ const SubmitButton = styled.button`
     letter-spacing: 2px;
     filter: drop-shadow(10px 10px 0 #2d2a32) drop-shadow(-10px -10px 0 #2d2a32);
   }
+  ${({ $sending }) =>
+    $sending &&
+    css`
+      pointer-events: none;
+      span {
+        @keyframes blink {
+          50% {
+            opacity: 0;
+          }
+        }
+        animation: blink 0.5s step-start 0s infinite;
+      }
+    `}
 `
