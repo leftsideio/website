@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { GlobalStyle } from "@/style"
 import { Backdrop } from "@/components/media"
 import left from "@/assets/images/logo-full.svg"
+import Footer from "./Footer"
 const Layout: React.FC = ({ children }) => {
   return (
     <>
@@ -9,6 +10,7 @@ const Layout: React.FC = ({ children }) => {
       <Backdrop />
       <Main>{children}</Main>
       <Logo src={left} />
+      <Footer />
     </>
   )
 }
