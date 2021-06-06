@@ -20,7 +20,7 @@ const Intro: React.FC = () => {
           <Head>
             <span>EMAIL SENT</span>
           </Head>
-          <SubHead>Looking forward to getting in touch shortly.</SubHead>
+          <SubHead>We look forward to building something incredible together.</SubHead>
         </>
       ) : (
         <>
@@ -60,6 +60,7 @@ const Head = styled(web.h1)`
   justify-self: start;
   color: #2d2a32;
   font-size: 10rem;
+
   span {
     filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
   }
@@ -67,4 +68,5 @@ const Head = styled(web.h1)`
 const SubHead = styled(web.p)`
   font-size: 4rem;
   line-height: 5rem;
+  min-width: 50rem;
 `
