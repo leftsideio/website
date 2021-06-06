@@ -1,3 +1,8 @@
+const path = require("path")
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
     title: `Leftside`,
@@ -7,33 +12,40 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-google-fonts`,
       options: {
-        path: `${__dirname}/src/assets/images`,
-        name: `assets`,
+        fonts: [`montserrat\:400`, `orbitron\:700`],
+        display: "swap",
       },
     },
+    `gatsby-plugin-styled-components`,
+    "gatsby-plugin-svgr",
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        rule: {
-          include: /src\/assets\/svg/,
-        },
+        name: `images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-styled-components`,
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        "@": path.join(__dirname, "src/"),
+        "#": path.join(__dirname, "static/"),
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `leftside.io`,
         short_name: `leftside`,
         start_url: `/`,
-        background_color: `#EBE5D1`,
-        theme_color: `#EBE5D1`,
+        background_color: `#fcfcfc`,
+        theme_color: `#fcfcfc`,
         display: `minimal-ui`,
-        icon: `src/assets/images/logo.png`,
+        icon: `src/assets/images/favicon.svg`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
