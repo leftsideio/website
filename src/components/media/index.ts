@@ -1,3 +1,4 @@
 import Icon from "./Icon"
 import Backdrop from "./Backdrop"
-export { Icon, Backdrop }
+import Button from "./Button"
+export { Icon, Backdrop, Button }
