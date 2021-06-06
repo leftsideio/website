@@ -4,6 +4,7 @@ import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
 import FileZone from "./FileZone"
+import { Button } from "@/components/media"
 
 const toBase64 = (file: any): Promise<any> =>
   new Promise((resolve, reject) => {
@@ -28,8 +29,8 @@ const Review: React.FC = () => {
         <Key $full>Attachments:</Key>
         {!!files.length && <FileZone style={{ gridColumn: "1 / -1", marginTop: "-1.5rem" }} />}
       </Content>
-      <SubmitButton
-        $sending={isSending}
+      <Button
+        loading={isSending}
         onClick={async () => {
           setSending(true)
           try {
@@ -38,7 +39,6 @@ const Review: React.FC = () => {
               const lilB = await toBase64(file)
               based.push(lilB)
             }
-            console.log(based)
             const res = await fetch("/.netlify/functions/send-email", {
               method: "POST",
               body: JSON.stringify({ name, email, message, files: based }),
@@ -56,8 +56,8 @@ const Review: React.FC = () => {
           state.isEmailSent = true
         }}
       >
-        <span>{isSending ? "SENDING" : "SEND EMAIL"}</span>
-      </SubmitButton>
+        {isSending ? "SENDING" : "SEND EMAIL"}
+      </Button>
     </Box>
   )
 }
@@ -102,37 +102,4 @@ const Value = styled.p`
   max-width: 25rem;
   font-size: 2rem;
   word-wrap: break-word;
-`
-const SubmitButton = styled.button`
-  margin-top: 3rem;
-  padding: 1rem;
-  color: #2d2a32;
-  font-family: Orbitron;
-  font-weight: 500;
-  font-size: 2.6rem;
-  background: white;
-  border: none;
-  filter: drop-shadow(8px 8px 0 #2d2a32) drop-shadow(-8px -8px 0 #2d2a32);
-  transition: all 0.2s;
-  span {
-    filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
-  }
-  &:hover {
-    cursor: pointer;
-    letter-spacing: 2px;
-    filter: drop-shadow(10px 10px 0 #2d2a32) drop-shadow(-10px -10px 0 #2d2a32);
-  }
-  ${({ $sending }) =>
-    $sending &&
-    css`
-      pointer-events: none;
-      span {
-        @keyframes blink {
-          50% {
-            opacity: 0;
-          }
-        }
-        animation: blink 0.5s step-start 0s infinite;
-      }
-    `}
 `

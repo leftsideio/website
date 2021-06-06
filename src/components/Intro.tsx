@@ -4,6 +4,7 @@ import { a as web } from "@react-spring/web"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
 
+import { Button } from "@/components/media"
 const Intro: React.FC = () => {
   const { isLaptopOpen, isEmailSent } = useSnapshot(state)
   const springProps = useSpring({ open: Number(isLaptopOpen) })
@@ -30,6 +31,13 @@ const Intro: React.FC = () => {
           <SubHead>
             Full service software development studio delivering timeless products while wielding tech of the future.
           </SubHead>
+          <Button
+            onClick={() => {
+              state.isLaptopOpen = true
+            }}
+          >
+            Let's Talk
+          </Button>
         </>
       )}
     </About>
@@ -39,6 +47,7 @@ const Intro: React.FC = () => {
 export default Intro
 
 const About = styled(web.div)`
+  background: white;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,7 +58,7 @@ const About = styled(web.div)`
   justify-content: center;
   align-content: center;
   align-items: center;
-  justify-items: center;
+  justify-items: start;
   ${({ $open }) =>
     $open &&
     css`
@@ -57,16 +66,14 @@ const About = styled(web.div)`
     `}
 `
 const Head = styled(web.h1)`
-  justify-self: start;
   color: #2d2a32;
   font-size: 10rem;
-
   span {
     filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
   }
 `
 const SubHead = styled(web.p)`
-  font-size: 4rem;
-  line-height: 5rem;
+  font-size: 3.2rem;
+  line-height: 4.4rem;
   min-width: 50rem;
 `

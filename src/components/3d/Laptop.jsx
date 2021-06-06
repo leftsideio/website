@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { Suspense, useEffect, useRef, useState } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Environment, useGLTF, ContactShadows } from "@react-three/drei"
 import { useSpring } from "@react-spring/core"
@@ -52,15 +52,6 @@ function Model({ open, hinge, ...props }) {
           <mesh material={materials["matte.001"]} geometry={nodes["Cube008_1"].geometry} />
           <mesh material={materials["screen.001"]} geometry={nodes["Cube008_2"].geometry} />
         </group>
-        {!open && !isEmailSent && (
-          <mesh
-            ref={text}
-            geometry={nodes.Text.geometry}
-            material={materials.Text}
-            position={[2.4, 4, 0.8]}
-            rotation={[0, 0, 0]}
-          />
-        )}
       </three.group>
       <mesh material={materials.keys} geometry={nodes.keyboard.geometry} position={[1.79, 0, 3.45]} />
       <group position={[0, -0.1, 3.39]}>
@@ -77,7 +68,7 @@ export default function Laptop() {
   // We turn this into a spring animation that interpolates between 0 and 1
   const springProps = useSpring({ open: Number(isLaptopOpen) })
   return (
-    <Box>
+    <Box $open={isLaptopOpen}>
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 0], fov: 35 }}>
         <three.pointLight
           position={[10, 10, 10]}
@@ -115,4 +106,6 @@ const Box = styled.div`
   height: 100vh;
   width: 100vw;
   transition: all 0.4s;
+
+  transform: ${({ $open }) => ($open ? "translateY(0)" : "translateY(15%)")};
 `
