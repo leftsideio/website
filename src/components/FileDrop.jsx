@@ -4,6 +4,7 @@ import styled, { css } from "styled-components"
 import { useSnapshot, ref } from "valtio"
 import { state } from "@/store"
 import FileZone from "./FileZone"
+import { media } from "@/style"
 
 const maxUploadSize = 4000000
 
@@ -51,6 +52,10 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: min-content;
   grid-row-gap: 2rem;
+  ${media[400]`
+    grid-row: 1;
+    grid-column: 1 / -1;
+  `}
 `
 const Droppy = styled.div`
   display: flex;
@@ -70,12 +75,25 @@ const Droppy = styled.div`
     css`
       filter: drop-shadow(2rem 2rem 0 #2d2a32) drop-shadow(-2rem -2rem 0 #2d2a32);
     `}
+  ${media[700]`
+    width: 35rem;
+  `}
+  ${media[575]`
+    width: 30rem;
+  `}
+  ${media[400]`
+    width: 100%;
+  `}
 `
 
 const Text = styled.h6`
   font-size: 2.6rem;
+  line-height: 3.2rem;
   color: #2d2a32;
   filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
+  ${media[575]`
+   font-size: 2.2rem
+  `}
 `
 
 const Err = styled.aside`

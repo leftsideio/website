@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import styled from "styled-components"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
-
+import { media } from "@/style"
 const Input = ({ param, requirement, ...rest }) => {
   const snap = useSnapshot(state, { sync: true })
   useEffect(() => {
@@ -39,4 +39,16 @@ const El = styled.input`
       filter: none;
     }
   }
+  ${media[700]`
+    width: 35rem;
+  `}
+  ${media[575]`
+    width: 30rem;
+    font-size: 2.2rem;
+  `}
+  ${media[400]`
+    grid-row: 1;
+    grid-column: 1 / -1;
+    width: 100%;
+  `}
 `

@@ -3,7 +3,7 @@ import { useSpring } from "@react-spring/core"
 import { a as web } from "@react-spring/web"
 import { useSnapshot } from "valtio"
 import { state } from "@/store"
-
+import { media } from "@/style"
 import { Button } from "@/components/media"
 const Intro: React.FC = () => {
   const { isLaptopOpen, isEmailSent } = useSnapshot(state)
@@ -47,6 +47,7 @@ const Intro: React.FC = () => {
 export default Intro
 
 const About = styled(web.div)`
+  padding: 1rem;
   background: white;
   position: absolute;
   top: 50%;
@@ -71,9 +72,32 @@ const Head = styled(web.h1)`
   span {
     filter: drop-shadow(6px 6px 0 rgba(235, 235, 235, 1)) drop-shadow(-6px -6px 0 rgba(235, 235, 235, 0.5));
   }
+  ${media[650]`
+   font-size: 8rem;
+  `}
+  ${media[400]`
+  font-size: 7rem;
+  `}
+  ${media[340]`
+  font-size: 5rem;
+  `}
 `
 const SubHead = styled(web.p)`
   font-size: 3.2rem;
   line-height: 4.4rem;
   min-width: 50rem;
+  ${media[650]`
+   font-size: 2.8rem;
+   line-height: 3.8rem;
+   min-width: 40rem;
+  `}
+  ${media[400]`
+   font-size: 2.2rem;
+   line-height: 3.2rem;
+   width: 100%;
+   min-width: 20rem;
+  `}
+  ${media[340]`
+  font-size: 1.8rem;
+  `}
 `

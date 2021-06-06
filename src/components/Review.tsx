@@ -5,6 +5,7 @@ import { state } from "@/store"
 
 import FileZone from "./FileZone"
 import { Button } from "@/components/media"
+import { media } from "@/style"
 
 const toBase64 = (file: any): Promise<any> =>
   new Promise((resolve, reject) => {
@@ -67,6 +68,11 @@ export default Review
 const Box = styled.div`
   display: flex;
   flex-direction: column;
+  ${media[400]`
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin: 0 2rem;
+  `}
 `
 const Content = styled.div`
   padding: 2rem 2rem 0;
@@ -87,6 +93,9 @@ const Content = styled.div`
     content: "";
     height: 1rem; // bottom padding on overflow because CSS grid?
   }
+  ${media[650]`
+    grid-template-columns: 1fr; 
+  `}
 `
 const Key = styled.h4`
   justify-self: end;
@@ -97,9 +106,18 @@ const Key = styled.h4`
       grid-column: 1 / -1;
       justify-self: start;
     `}
+  ${media[650]`
+   justify-self: start;
+  `}
 `
 const Value = styled.p`
   max-width: 25rem;
   font-size: 2rem;
   word-wrap: break-word;
+  ${media[400]`
+    max-width: 30rem;
+  `}
+  ${media[340]`
+    max-width: 28rem;
+  `}
 `

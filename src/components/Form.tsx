@@ -8,6 +8,7 @@ import Input from "./Input"
 import FileDrop from "./FileDrop"
 import Review from "./Review"
 import { Icon } from "@/components/media"
+import { media } from "@/style"
 
 const Form: React.FC = () => {
   const { isLaptopOpen, step, isNextStep, message } = useSnapshot(state)
@@ -76,11 +77,17 @@ const Box = styled.div`
   display: grid;
   grid-template-columns: repeat(3, min-content);
   grid-column-gap: 3rem;
+  grid-row-gap: 2rem;
   align-content: center;
   justify-content: center;
   align-items: center;
   justify-items: center;
   transition: all 0.4s;
+  ${media[400]`
+    padding: 4rem 2rem;
+    background: white;
+    grid-template-columns: repeat(2, 1fr);
+  `}
 `
 const Navigate = styled(Icon).attrs({ name: "left" })`
   height: 8rem;
@@ -88,7 +95,6 @@ const Navigate = styled(Icon).attrs({ name: "left" })`
   opacity: 0;
   visibility: hidden;
   overflow: visible;
-
   .left_svg__outer {
     transform: translateX(4rem);
     transition: all 0.2s;
@@ -99,21 +105,36 @@ const Navigate = styled(Icon).attrs({ name: "left" })`
       transform: translateX(0);
     }
   }
-  ${({ $back }) =>
-    $back &&
-    css`
-      transform: rotate(-180deg);
-    `}
   ${({ $show }) =>
     $show &&
     css`
       opacity: 1;
       visibility: visible;
     `}
+  ${media[575]`
+    height: 6rem;
+  `}
+  ${media[400]`
+    height: 8rem;
+    justify-self: start;
+  `}
+  ${({ $back }) =>
+    $back &&
+    css`
+      transform: rotate(-180deg);
+      ${media[400]`
+       justify-self: end;
+      `}
+    `}
 `
 const TextAreaWrap = styled.div`
   display: flex;
   flex-direction: column;
+  ${media[400]`
+    grid-row: 1;
+    grid-column: 1 / -1;
+    width: 100%;
+  `}
 `
 const WordLimit = styled.span`
   align-self: flex-end;

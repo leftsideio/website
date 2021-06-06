@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-
+import { media } from "@/style"
 interface Props {
   onClick?: (e?: any) => void
   loading?: boolean
@@ -48,4 +48,8 @@ const Wrap = styled.button`
         animation: blink 0.5s step-start 0s infinite;
       }
     `}
+  ${media[650]`
+   font-size: 2.2rem;
+
+  `}
 `
