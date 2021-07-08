@@ -1,6 +1,6 @@
 import * as THREE from "three"
 import { Suspense, useEffect, useRef, useState } from "react"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Environment, useGLTF, ContactShadows } from "@react-three/drei"
 import { useSpring } from "@react-spring/core"
@@ -13,7 +13,6 @@ const vec = new THREE.Vector3()
 function Model({ open, hinge, ...props }) {
   const { isEmailSent } = useSnapshot(state)
   const group = useRef()
-  const text = useRef()
   // Load model
   const { nodes, materials } = useGLTF("/models/untitled.glb")
   // Take care of cursor state on hover
@@ -106,6 +105,5 @@ const Box = styled.div`
   height: 100vh;
   width: 100vw;
   transition: all 0.4s;
-
   transform: ${({ $open }) => ($open ? "translateY(0)" : "translateY(15%)")};
 `
