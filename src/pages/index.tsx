@@ -9,7 +9,7 @@ import Laptop from "@/components/3d/Laptop"
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <Layout>
-      <SEO title="Leftside" />
+      <SEO />
       <Laptop />
       <Intro />
       <Form />
