@@ -23,7 +23,7 @@ html {
   font-size: 62.5%;
   min-width: 100vw;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   /* -ms-overflow-style: none; 
   scrollbar-width: none; 
   &::-webkit-scrollbar {
