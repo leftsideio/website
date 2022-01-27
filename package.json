@@ -44,7 +44,7 @@
     "react-helmet": "^6.1.0",
     "styled-components": "^5.2.3",
     "styled-reset": "^4.3.0",
-    "three": "^0.129.0",
+    "three": "^0.137.0",
     "valtio": "^1.0.5"
   },
   "devDependencies": {
